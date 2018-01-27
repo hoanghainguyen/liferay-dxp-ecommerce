@@ -3,15 +3,16 @@ package com.rivetlogic.ecommerce.notification;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.petra.mail.MailEngine;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
-
 import com.rivetlogic.ecommerce.beans.ShoppingCartItem;
 import com.rivetlogic.ecommerce.beans.ShoppingCartPrefsBean;
 import com.rivetlogic.ecommerce.model.Notification;
@@ -23,6 +24,7 @@ import java.io.StringWriter;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,8 +34,55 @@ import javax.mail.internet.InternetAddress;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-
 public class EmailNotificationUtil {
+	
+	
+	public static Map<String, String> getEmailDefinitionTerms(
+			Locale locale, String emailFromAddress,
+			String emailFromName/*, String emailType*/) {
+
+
+			String fromAddress = HtmlUtil.escape(emailFromAddress);
+			String fromName = HtmlUtil.escape(emailFromName);
+			String toAddress = LanguageUtil.get(locale, "the-address-of-the-email-recipient");
+			String toName = LanguageUtil.get( locale, "the-name-of-the-email-recipient");
+
+			/*if (emailType.equals("requested")) {
+				toName = fromName;
+				toAddress = fromAddress;
+
+				fromName = LanguageUtil.get(
+					locale, "the-name-of-the-email-sender");
+				fromAddress = LanguageUtil.get(
+					locale, "the-address-of-the-email-sender");
+			}*/
+
+			Map<String, String> definitionTerms = new LinkedHashMap<>();
+
+			definitionTerms.put("[$STORE_NAME$]", LanguageUtil.get(locale, "ecommerce-email-store-name"));
+			definitionTerms.put("[$STORE_LOGO$]", LanguageUtil.get(locale, "ecommerce-email-store-logo"));
+			definitionTerms.put("[$CUSTOMER_NAME$]", LanguageUtil.get(locale, "ecommerce-customer-name"));
+			definitionTerms.put("[$CUSTOMER_EMAIL$]", LanguageUtil.get(locale, "ecommerce-customer-email"));
+			definitionTerms.put("[$CUSTOMER_CONTACT_INFO$]", LanguageUtil.get(locale, "ecommerce-customer-contact-info"));
+			definitionTerms.put("[$ORDER_SUMMARY$]", LanguageUtil.get(locale, "ecommerce-order-summary"));
+			definitionTerms.put("[$ORDER_TOTAL$]", LanguageUtil.get(locale, "ecommerce-order-total"));
+			definitionTerms.put("[$CHECKOUT_DATE$]", LanguageUtil.get(locale, "ecommerce-checkout-date"));
+			definitionTerms.put("[$FROM_ADDRESS$]", fromAddress);
+			definitionTerms.put("[$FROM_NAME$]", fromName);
+/*
+			Company company = themeDisplay.getCompany();
+
+			definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
+
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			definitionTerms.put(
+				"[$PORTLET_NAME$]", HtmlUtil.escape(portletDisplay.getTitle()));
+*/
+
+			return definitionTerms;
+		}
+	
     public static String getPortalLogo(ThemeDisplay themeDisplay) {
         return themeDisplay.getPortalURL() + PortalUtil.getPathImage()
                 + "/company_logo?img_id="

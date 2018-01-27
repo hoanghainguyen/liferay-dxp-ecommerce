@@ -33,6 +33,14 @@ public interface EcommerceGroupServiceConfiguration {
 	public String storeEmailName();
 	
 	@Meta.AD(
+			deflt = "true",
+	        required = false,
+	        name = "com.rivetlogic.ecommerce.config.store.email.enabled.name",
+	        description = "com.rivetlogic.ecommerce.config.store.email.enabled.description"
+	)
+	public boolean storeEmailEnabled();
+	
+	@Meta.AD(
 			deflt = "${resource:com/rivetlogic/ecommerce/config/dependencies/store_email_subject.tmpl}",
 	        required = false,
 	        name = "com.rivetlogic.ecommerce.config.store.email.subject.name",
@@ -49,12 +57,20 @@ public interface EcommerceGroupServiceConfiguration {
 	public LocalizedValuesMap storeEmailBody();
 	
 	@Meta.AD(
+			deflt = "true",
+	        required = false,
+	        name = "com.rivetlogic.ecommerce.config.customer.email.enabled.name",
+	        description = "com.rivetlogic.ecommerce.config.customer.email.enabled.description"
+	)
+	public boolean customerEmailEnabled();
+	
+	@Meta.AD(
 			deflt = "${resource:com/rivetlogic/ecommerce/config/dependencies/customer_email_subject.tmpl}",
 	        required = false,
 	        name = "com.rivetlogic.ecommerce.config.customer.email.subject.name",
 	        description = "com.rivetlogic.ecommerce.config.customer.email.subject.description"
 	)
-	public String customerEmailSubject();
+	public LocalizedValuesMap customerEmailSubject();
 	
 	@Meta.AD(
 			deflt = "${resource:com/rivetlogic/ecommerce/config/dependencies/customer_email_body.tmpl}",
@@ -62,7 +78,7 @@ public interface EcommerceGroupServiceConfiguration {
 	        name = "com.rivetlogic.ecommerce.config.customer.email.body.name",
 	        description = "com.rivetlogic.ecommerce.config.customer.email.body.description"
 	)
-	public String customerEmailBody();
+	public LocalizedValuesMap customerEmailBody();
 	
 	@Meta.AD(
 			deflt = "Your order has been placed!",
@@ -89,7 +105,7 @@ public interface EcommerceGroupServiceConfiguration {
 	public String messageCartEmpty();
 	
 	@Meta.AD(
-			deflt = "",
+			deflt = "true",
 	        required = false,
 	        name = "com.rivetlogic.ecommerce.config.paypal.enabled.name",
 	        description = "com.rivetlogic.ecommerce.config.paypal.enabled.description"
@@ -99,8 +115,8 @@ public interface EcommerceGroupServiceConfiguration {
 	@Meta.AD(
 			deflt = "",
 	        required = false,
-	        name = "com.rivetlogic.ecommerce.config.paypal.business.email.name",
-	        description = "com.rivetlogic.ecommerce.config.paypal.business.email.description"
+	        name = "com.rivetlogic.ecommerce.config.paypal.business.email.address.name",
+	        description = "com.rivetlogic.ecommerce.config.paypal.business.email.address.description"
 	)
-	public String paypalBusinessEmail();
+	public String paypalBusinessEmailAddress();
 }

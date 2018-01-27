@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
         "com.liferay.portlet.instanceable=false",
         "com.liferay.portlet.preferences-owned-by-group=true",
         "com.liferay.portlet.preferences-unique-per-layout=false",
-        "com.liferay.portlet.render-weight=50",
+        "com.liferay.portlet.render-weight=100",
 		"com.liferay.portlet.scopeable=true",
 		"com.liferay.portlet.use-default-template=true",
         "javax.portlet.security-role-ref=power-user,user",

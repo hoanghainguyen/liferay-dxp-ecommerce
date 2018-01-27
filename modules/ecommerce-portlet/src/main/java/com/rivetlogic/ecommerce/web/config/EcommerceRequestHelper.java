@@ -5,7 +5,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ParameterMapSettingsLocator;
-import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Validator;
@@ -24,14 +23,10 @@ public class EcommerceRequestHelper {
 	public EcommerceGroupServiceConfiguration getEcommerceGroupServiceConfiguration() {
 
 		try {
-			System.out.println("1 "+_ecommerceGroupServiceConfiguration);
 			
 			if (_ecommerceGroupServiceConfiguration == null) {
-				ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(WebKeys.THEME_DISPLAY);
-				System.out.println("1b "+themeDisplay.getSiteGroupId());
-				
-				PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-				
+				ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(WebKeys.THEME_DISPLAY);				
+				PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();				
 				
 				if (Validator.isNotNull(portletDisplay.getPortletResource())) {
 					_ecommerceGroupServiceConfiguration = ConfigurationProviderUtil
@@ -41,7 +36,7 @@ public class EcommerceRequestHelper {
 													ShoppingCartPortletKeys.SHOPPING_CART_ADMIN)));
 				} 
 				
-				if (_ecommerceGroupServiceConfiguration.storeEmailAddress().isEmpty() || Validator.isNull(portletDisplay.getPortletResource()) ) { 
+				if (_ecommerceGroupServiceConfiguration.storeEmailAddress().isEmpty() || Validator.isNull(portletDisplay.getPortletResource()) ) {
 					_ecommerceGroupServiceConfiguration = ConfigurationProviderUtil
 							.getGroupConfiguration(EcommerceGroupServiceConfiguration.class, themeDisplay.getSiteGroupId());
 				}

@@ -8,7 +8,8 @@ Export-Package:\
 	com.rivetlogic.ecommerce.service.persistence,\
 	com.rivetlogic.ecommerce.util,\
 	com.rivetlogic.ecommerce.configuration,\
-	com.rivetlogic.ecommerce.notification
+	com.rivetlogic.ecommerce.notification,\
+	com.rivetlogic.ecommerce.beans
 Import-Package:\
 	!com.werken.xpath,\
 	\
