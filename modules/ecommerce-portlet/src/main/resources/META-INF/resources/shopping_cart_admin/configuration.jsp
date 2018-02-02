@@ -2,11 +2,9 @@
 
 <%
 
-EcommerceRequestHelper ecommerceRequestHelper = new EcommerceRequestHelper(request);
+EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = EcommerceRequestHelper.getEcommerceGroupServiceConfiguration(request);
 
-EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = ecommerceRequestHelper.getEcommerceGroupServiceConfiguration();
-
-String storeEmailName = ParamUtil.getString(request, "preferences--storeEmailName--", ecommerceGroupServiceConfiguration.storeEmailName());
+String storeName = ParamUtil.getString(request, "preferences--storeName--", ecommerceGroupServiceConfiguration.storeName());
 String storeEmailAddress = ParamUtil.getString(request, "preferences--storeEmailAddress--", ecommerceGroupServiceConfiguration.storeEmailAddress());
 String messageCheckoutSuccess = ParamUtil.getString(request, "preferences--messageCheckoutSuccess--", ecommerceGroupServiceConfiguration.messageCheckoutSuccess());
 String messageCheckoutError = ParamUtil.getString(request, "preferences--messageCheckoutError--", ecommerceGroupServiceConfiguration.messageCheckoutError());
@@ -37,14 +35,14 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 			type="tabs nav-tabs-default"
 		>
 		
-		<liferay-ui:error key="storeEmailName" message="please-enter-a-valid-name" />
+		<liferay-ui:error key="storeName" message="please-enter-a-valid-name" />
 		<liferay-ui:error key="storeEmailAddress" message="please-enter-a-valid-email-address" />
 		
 			<liferay-ui:section>
 				<div class="container-fluid-1280">
 					<aui:fieldset-group markupView="lexicon">
 						<aui:fieldset>
-							<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--storeEmailName--" type="text" value="<%= storeEmailName %>" />
+							<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--storeName--" type="text" value="<%= storeName %>" />
 							<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--storeEmailAddress--" type="text" value="<%= storeEmailAddress %>" />
 
 						</aui:fieldset>
@@ -53,7 +51,7 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 			</liferay-ui:section>
 			
 			<%
-			Map<String, String> emailDefinitionTerms =  EmailNotificationUtil.getEmailDefinitionTerms(locale, storeEmailAddress, storeEmailName);
+			Map<String, String> emailDefinitionTerms =  EmailNotificationUtil.getEmailDefinitionTerms(locale, storeEmailAddress, storeName);
 			%>
 
 			<liferay-ui:section>

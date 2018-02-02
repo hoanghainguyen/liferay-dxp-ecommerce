@@ -25,4 +25,4 @@ Import-Package:\
 		@velocity-[0-9]*.jar,\
         @velocity-tools-[0-9]*.jar,\
 		META-INF/service.xml=../ecommerce-service-service/service.xml
-        
+-sources: true

@@ -1,0 +1,95 @@
+<% if(null != cartItemsIdsList && !cartItemsIdsList.isEmpty()){ %>   
+<div class="row-fluid" id="checkout-panel">
+  <div class="span12">
+    <div class="block">
+      <div class="navbar navbar-inner block-header">
+        <div class="muted pull-left">Shipping Information</div>
+      </div>
+      <div class="block-content collapse in">
+        <div class="span12">
+          <div class="alert alert-info"><span class="text-error">*</span> indicates required field</div>
+          <liferay-ui:error key="error-information-required" message="checkout-information-required-not-found" />
+          <div id="page-reload-warning" class="alert alert-warning hide">
+          	<liferay-ui:message key="reload-message-checkout" />
+          </div>
+          <form id="form-checkout" class="form-horizontal" method="post">
+          
+          
+          	<aui:fieldset-group markupView="lexicon">
+          	
+          	
+          <div class="lfr-form-row">
+			<div class="row-fields">
+          
+          		<aui:col width="<%= 50 %>">
+          			<div class="control-group span6">
+                <label for="email">Email Address <span class="text-error">*</span></label>
+                <input type="text" id="email" value="" name="<portlet:namespace />email" placeholder="Email Address" required>
+              </div> 
+              <div class="control-group span6">
+                <label for="street">Address line 1 <span class="text-error">*</span></label>
+                <input type="text" id="street1" value="" name="<portlet:namespace />address1" placeholder="Street Address" required>
+              </div>
+              
+              <div class="control-group span6">
+                <label for="city">City <span class="text-error">*</span></label>
+                <input type="text" id="city" value="" name="<portlet:namespace />city" placeholder="City" required>
+              </div>
+              
+              <div class="control-group span6">
+                <label for="postal">Postal Code</label>
+                <input type="text" id="postal" value="" name="<portlet:namespace />postalCode" placeholder="Postal Code">
+              </div> 
+              
+               <div class="control-group span6">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" value="" name="<portlet:namespace />phone" placeholder="Phone">
+              </div> 
+          		</aui:col>
+
+		  		<aui:col width="<%= 50 %>">
+		  		
+		  		<div class="control-group span6">
+                <label for="name">Name <span class="text-error">*</span></label>
+                <input type="text" id="name" value="" name="<portlet:namespace />name" placeholder="Full Name" required>
+              </div>
+              
+              <div class="control-group span6">
+                <label for="street">Address line 2 </label>
+                <input type="text" id="street2" value="" name="<portlet:namespace />address2" placeholder="Building/Apt/Suite">
+              </div>
+              
+              <div class="control-group span6">
+                <label for="State">State/Province <span class="text-error">*</span></label>
+                <input type="text" id="State" value="" name="<portlet:namespace />stateProvince" placeholder="State" required>
+              </div>  
+              
+              <div class="control-group span6">
+                <label for="country">Country <span class="text-error">*</span></label>
+                <select id="country" name="<portlet:namespace />country" required>
+                  <%@ include file="/shopping_cart/options_country.jspf" %>
+                </select>
+              </div>  
+              
+              
+		  		</aui:col>
+          	</div>
+			</div>
+			
+				</aui:fieldset-group>
+						
+			<aui:button-row>
+				<c:if test="<%= ecommerceGroupServiceConfiguration.enablePaypal() %>">
+                  	<button type="button" class="btn btn-primary" id="btn-paypal-checkout">Paypal Checkout</button>
+                  </c:if>
+                  <button type="button" class="btn btn-primary" id="btn-checkout">Offline Checkout</button>
+			</aui:button-row>
+
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>

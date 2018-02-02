@@ -2,15 +2,22 @@ package com.rivetlogic.ecommerce.notification;
 
 public class NotificationConstants {
 	public static final String CMD = "cmd";
+	
+	public static final String STORE_EMAIL = "storeEmail";
+	public static final String STORE_NAME = "storeName";
+	public static final String STORE_LOGO = "storeLogo";
+	
+	public static final String FROM_ADDRESS = "fromAddress";
+	public static final String FROM_NAME = "fromName";
 
 	public static final String CUSTOMER_EMAIL = "customerEmail";
 	public static final String CUSTOMER_NAME = "customerName";
+	public static final String CUSTOMER_NOTIFICATION = "customerNotification";
 
 	public static final String SHOPPING_ORDER = "shoppingOrder";
 	public static final String SHOPPING_ORDER_ITEMS = "shoppingOrderItems";
-	public static final String STORE_EMAIL = "storeEmail";
-	public static final String STORE_NAME = "storeName";
-	public static final String CUSTOMER_NOTIFICATION = "customer-notification";
+
+	
 	public static final String STORE_NOTIFICATION = "store-notification";
 
 	public static final String SUBJECT_TEMPLATE = "subject-template";
@@ -22,7 +29,7 @@ public class NotificationConstants {
 
 	public static final String ORDER_SUMMARY = "orderSummary";
 	public static final String CUSTOMER_INFO = "customerContactInfo";
-	public static final String STORE_LOGO = "storeLogo";
+	
 	public static final String ORDER_TOTAL = "orderTotal";
 	public static final String DATE = "date";
 

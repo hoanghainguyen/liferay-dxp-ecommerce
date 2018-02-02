@@ -116,10 +116,10 @@ public class ShoppingCartItem {
 		return Float.valueOf(getPrice()) * (float)getCount();
 	}
 	
-	public static final String LIST_PRICE = "/root/dynamic-element[@name='listPrice']/dynamic-content";
-	public static final String SALE_PRICE = "/root/dynamic-element[@name='salePrice']/dynamic-content";
-	public static final String PRODUCT_TITLE = "/root/dynamic-element[@name='productTitle']/dynamic-content";
-	public static final String PRODUCT_IMAGES = "/root/dynamic-element[@name='productImages']/dynamic-content";
+	public static final String LIST_PRICE = "/root/dynamic-element[@name='ListPrice']/dynamic-content";
+	public static final String SALE_PRICE = "/root/dynamic-element[@name='SalePrice']/dynamic-content";
+	public static final String PRODUCT_TITLE = "/root/dynamic-element[@name='ProductTitle']/dynamic-content";
+	public static final String PRODUCT_IMAGES = "/root/dynamic-element[@name='ProductImages']/dynamic-content";
 	
 
 }

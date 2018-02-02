@@ -17,21 +17,21 @@ import aQute.bnd.annotation.metatype.Meta;
 public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
+			deflt = "My Store",
+	        required = false,
+	        name = "com.rivetlogic.ecommerce.config.store.name.name",
+	        description = "com.rivetlogic.ecommerce.config.store.name.description"
+	)
+	public String storeName();
+	
+	@Meta.AD(
 			deflt = "${server-property://com.liferay.portal/admin.email.from.address}",
 	        required = false,
 	        name = "com.rivetlogic.ecommerce.config.store.email.address.name",
 	        description = "com.rivetlogic.ecommerce.config.store.email.address.description"
 	)
 	public String storeEmailAddress();
-	
-	@Meta.AD(
-			deflt = "${server-property://com.liferay.portal/admin.email.from.name}",
-	        required = false,
-	        name = "com.rivetlogic.ecommerce.config.store.email.name.name",
-	        description = "com.rivetlogic.ecommerce.config.store.email.name.description"
-	)
-	public String storeEmailName();
-	
+
 	@Meta.AD(
 			deflt = "true",
 	        required = false,

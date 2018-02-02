@@ -1,20 +1,22 @@
 package com.rivetlogic.ecommerce.beans;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.rivetlogic.ecommerce.util.PreferencesKeys;
+import com.rivetlogic.ecommerce.configuration.EcommerceGroupServiceConfiguration;
 
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
+import java.util.Locale;
 
 public class ShoppingCartPrefsBean {
 
+	private boolean isCustomerEmailEnabled;
 	private String customerNotifSubjectTemplate;
 	private String customerNotifBodyTemplate;
+
+	private boolean isStoreEmailEnabled;
 	private String storeNotifSubjectTemplate;
 	private String storeNotifBodyTemplate;
+
 	private String storeEmail;
 	private String storeName;
+
 	private String checkoutSuccessMessage;
 	private String checkoutErrorMessage;
 	private String cartIsEmptyMessage;
@@ -22,33 +24,28 @@ public class ShoppingCartPrefsBean {
 	private boolean paypalEnabled;
 	private String paypalEmail;
 
-	public ShoppingCartPrefsBean(PortletRequest request) {
-		this(request.getPreferences());
+	public ShoppingCartPrefsBean(EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration, Locale locale) {
+		setFields(ecommerceGroupServiceConfiguration, locale);
 	}
 
-	public ShoppingCartPrefsBean(PortletPreferences preferences) {
-		setFields(preferences);
-	}
+	private void setFields(EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration, Locale locale) {
+		isCustomerEmailEnabled = ecommerceGroupServiceConfiguration.customerEmailEnabled();
+		customerNotifSubjectTemplate = ecommerceGroupServiceConfiguration.customerEmailSubject().get(locale);
+		customerNotifBodyTemplate = ecommerceGroupServiceConfiguration.customerEmailBody().get(locale);
 
-	private void setFields(PortletPreferences portletPreferences) {
-		setStoreNotifSubjectTemplate(
-				portletPreferences.getValue(PreferencesKeys.STORE_NOTIF_SUBJECT_TEMPLATE, StringPool.BLANK));
-		setStoreNotifBodyTemplate(
-				portletPreferences.getValue(PreferencesKeys.STORE_NOTIF_BODY_TEMPLATE, StringPool.BLANK));
-		setCustomerNotifSubjectTemplate(
-				portletPreferences.getValue(PreferencesKeys.CUSTOMER_NOTIF_SUBJECT_TEMPLATE, StringPool.BLANK));
-		setCustomerNotifBodyTemplate(
-				portletPreferences.getValue(PreferencesKeys.CUSTOMER_NOTIF_BODY_TEMPLATE, StringPool.BLANK));
-		setStoreEmail(portletPreferences.getValue(PreferencesKeys.STORE_EMAIL, StringPool.BLANK));
-		setStoreName(portletPreferences.getValue(PreferencesKeys.STORE_NAME, StringPool.BLANK));
-		setCheckoutErrorMessage(portletPreferences.getValue(PreferencesKeys.CHECKOUT_ERROR_MESSAGE, StringPool.BLANK));
-		setCheckoutSuccessMessage(
-				portletPreferences.getValue(PreferencesKeys.CHECKOUT_SUCCESS_MESSAGE, StringPool.BLANK));
-		setCartIsEmptyMessage(portletPreferences.getValue(PreferencesKeys.CART_EMPTY_MESSAGE, StringPool.BLANK));
+		isStoreEmailEnabled = ecommerceGroupServiceConfiguration.storeEmailEnabled();
+		storeNotifSubjectTemplate = ecommerceGroupServiceConfiguration.storeEmailSubject().get(locale);
+		storeNotifBodyTemplate = ecommerceGroupServiceConfiguration.storeEmailBody().get(locale);
 
-		setPaypalEnabled(
-				GetterUtil.getBoolean(portletPreferences.getValue(PreferencesKeys.ENABLE_PAYPAL, StringPool.FALSE)));
-		setPaypalEmail(portletPreferences.getValue(PreferencesKeys.PAYPAL_EMAIL, StringPool.BLANK));
+		storeEmail = ecommerceGroupServiceConfiguration.storeEmailAddress();
+		storeName = ecommerceGroupServiceConfiguration.storeName();
+
+		checkoutSuccessMessage = ecommerceGroupServiceConfiguration.messageCheckoutSuccess();
+		checkoutErrorMessage = ecommerceGroupServiceConfiguration.messageCheckoutError();
+		cartIsEmptyMessage = ecommerceGroupServiceConfiguration.messageCartEmpty();
+
+		paypalEnabled = ecommerceGroupServiceConfiguration.enablePaypal();
+		paypalEmail = ecommerceGroupServiceConfiguration.paypalBusinessEmailAddress();
 	}
 
 	public boolean isCartPrefsValidForCheckout(boolean isPaypal) {
@@ -163,6 +160,22 @@ public class ShoppingCartPrefsBean {
 
 	public void setPaypalEmail(String paypalEmail) {
 		this.paypalEmail = paypalEmail;
+	}
+
+	public boolean isCustomerEmailEnabled() {
+		return isCustomerEmailEnabled;
+	}
+
+	public void setCustomerEmailEnabled(boolean isCustomerEmailEnabled) {
+		this.isCustomerEmailEnabled = isCustomerEmailEnabled;
+	}
+
+	public boolean isStoreEmailEnabled() {
+		return isStoreEmailEnabled;
+	}
+
+	public void setStoreEmailEnabled(boolean isStoreEmailEnabled) {
+		this.isStoreEmailEnabled = isStoreEmailEnabled;
 	}
 
 }

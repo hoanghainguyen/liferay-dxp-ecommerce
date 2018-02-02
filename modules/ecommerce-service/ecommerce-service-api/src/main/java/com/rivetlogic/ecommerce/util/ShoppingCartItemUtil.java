@@ -5,6 +5,7 @@ import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -43,7 +44,8 @@ public class ShoppingCartItemUtil {
     
     public static void setCartItemDetails(String productId,
             ThemeDisplay themeDisplay, ShoppingCartItem shoppingCartItem) {
-        long groupId = themeDisplay.getScopeGroupId();
+        Group group = themeDisplay.getScopeGroup();
+        long groupId = group.getGroupId();
         Document document = getItemContent(productId, groupId);
         if (null != document) {
             Node itemTitleNode = document.selectSingleNode(ShoppingCartItem.PRODUCT_TITLE);
@@ -56,7 +58,8 @@ public class ShoppingCartItemUtil {
             shoppingCartItem.setItemImage(themeDisplay.getPortalURL() + imagesNode.getStringValue());
         }
         shoppingCartItem.setItemLink(themeDisplay.getPortalURL()
-                + WEB_PAGE_PATH + themeDisplay.getScopeGroup().getFriendlyURL()
+        		+ group.getPathFriendlyURL(themeDisplay.getLayout().isPrivateLayout(), themeDisplay)
+                + group.getFriendlyURL()
                 + VIEW_PAGE_PATH + shoppingCartItem.getProductId());
     }
     
@@ -93,8 +96,7 @@ public class ShoppingCartItemUtil {
         }
         return shoppingCartItemsList;
     }
-    
-    private static final String WEB_PAGE_PATH = "/web";
+
     private static final String VIEW_PAGE_PATH = "/view?id=";
     
     private static final Log logger = LogFactoryUtil.getLog(ShoppingCartItemUtil.class);

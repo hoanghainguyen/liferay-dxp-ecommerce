@@ -20,9 +20,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.rivetlogic.ecommerce.model.Notification;
 import com.rivetlogic.ecommerce.model.ShoppingOrder;
-import com.rivetlogic.ecommerce.service.ShoppingOrderItemLocalServiceUtil;
+import com.rivetlogic.ecommerce.notification.EmailNotificationUtil;
 import com.rivetlogic.ecommerce.service.ShoppingOrderLocalServiceUtil;
 import com.rivetlogic.ecommerce.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.rivetlogic.ecommerce.util.OrderStatusEnum;
@@ -89,7 +88,7 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		shoppingOrderItemLocalService.saveOrderItemsByProductId(orderItemsProductIdsList, shoppingOrder, prices, serviceContext);
 		if (!paypalEnabled && null != notifyMessages)
 			for (Message message : notifyMessages) {
-				//TODOEmailNotificationUtil.sendEmailNotification(message);
+				EmailNotificationUtil.sendEmailNotification(message, serviceContext);
 			}
 	}
 

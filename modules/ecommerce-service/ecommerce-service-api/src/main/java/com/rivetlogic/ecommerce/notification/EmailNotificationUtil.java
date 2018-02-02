@@ -13,6 +13,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.rivetlogic.ecommerce.beans.ShoppingCartItem;
 import com.rivetlogic.ecommerce.beans.ShoppingCartPrefsBean;
 import com.rivetlogic.ecommerce.model.Notification;
@@ -20,6 +21,7 @@ import com.rivetlogic.ecommerce.model.ShoppingOrder;
 import com.rivetlogic.ecommerce.service.NotificationLocalServiceUtil;
 import com.rivetlogic.ecommerce.util.ShoppingCartItemUtil;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -46,7 +48,7 @@ public class EmailNotificationUtil {
 			String fromName = HtmlUtil.escape(emailFromName);
 			String toAddress = LanguageUtil.get(locale, "the-address-of-the-email-recipient");
 			String toName = LanguageUtil.get( locale, "the-name-of-the-email-recipient");
-
+			//TODO review:
 			/*if (emailType.equals("requested")) {
 				toName = fromName;
 				toAddress = fromAddress;
@@ -59,16 +61,16 @@ public class EmailNotificationUtil {
 
 			Map<String, String> definitionTerms = new LinkedHashMap<>();
 
-			definitionTerms.put("[$STORE_NAME$]", LanguageUtil.get(locale, "ecommerce-email-store-name"));
-			definitionTerms.put("[$STORE_LOGO$]", LanguageUtil.get(locale, "ecommerce-email-store-logo"));
-			definitionTerms.put("[$CUSTOMER_NAME$]", LanguageUtil.get(locale, "ecommerce-customer-name"));
-			definitionTerms.put("[$CUSTOMER_EMAIL$]", LanguageUtil.get(locale, "ecommerce-customer-email"));
-			definitionTerms.put("[$CUSTOMER_CONTACT_INFO$]", LanguageUtil.get(locale, "ecommerce-customer-contact-info"));
-			definitionTerms.put("[$ORDER_SUMMARY$]", LanguageUtil.get(locale, "ecommerce-order-summary"));
-			definitionTerms.put("[$ORDER_TOTAL$]", LanguageUtil.get(locale, "ecommerce-order-total"));
-			definitionTerms.put("[$CHECKOUT_DATE$]", LanguageUtil.get(locale, "ecommerce-checkout-date"));
-			definitionTerms.put("[$FROM_ADDRESS$]", fromAddress);
-			definitionTerms.put("[$FROM_NAME$]", fromName);
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.STORE_NAME, LanguageUtil.get(locale, "ecommerce-store-name"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.STORE_LOGO, LanguageUtil.get(locale, "ecommerce-email-store-logo"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.CUSTOMER_NAME, LanguageUtil.get(locale, "ecommerce-customer-name"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.CUSTOMER_EMAIL, LanguageUtil.get(locale, "ecommerce-customer-email"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.CUSTOMER_INFO, LanguageUtil.get(locale, "ecommerce-customer-contact-info"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.ORDER_SUMMARY, LanguageUtil.get(locale, "ecommerce-order-summary"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.ORDER_TOTAL, LanguageUtil.get(locale, "ecommerce-order-total"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.DATE, LanguageUtil.get(locale, "ecommerce-checkout-date"));
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.FROM_ADDRESS, fromAddress);
+			definitionTerms.put(StringPool.DOLLAR+NotificationConstants.FROM_NAME, fromName);
 /*
 			Company company = themeDisplay.getCompany();
 
@@ -226,53 +228,33 @@ public class EmailNotificationUtil {
 	    	notification.setBody(evaluateTemplate(variables, notification.getBody()));
 	    	notification.setSubject(evaluateTemplate(variables, notification.getSubject()));
 	    	StringBuilder strBuilder = new StringBuilder();
-	    	//TODO review ContentUtil.get(
-	    	strBuilder.append("templates/"+NotificationConstants.BODY_HEADER_TEMPLATE);
+
+	    	strBuilder.append(processTemplate(NotificationConstants.BODY_HEADER_TEMPLATE, variables));
 	    	strBuilder.append(notification.getBody());
-	    	strBuilder.append("templates/"+NotificationConstants.BODY_FOOTER_TEMPLATE);
+	    	strBuilder.append(processTemplate(NotificationConstants.BODY_FOOTER_TEMPLATE, variables));
 	    	notification.setBody(strBuilder.toString());
 	    }
 	    
 	    private static void addCommonTemplates(Map<String, Object> messageObjects){
-	    	String []templatesNames = getNotificationTemplates();
-	    	if(null != templatesNames){
-	    		for(int i = 0; i < templatesNames.length; i++){
-	    			//TODO review ContentUtil.get
-	    			messageObjects.put(getTemplateVariableName(templatesNames[i]), evaluateTemplate(messageObjects, "templates/"+templatesNames[i]));
-	    		}
-	    	}
-	    	
+	    	messageObjects.put(NotificationConstants.ORDER_SUMMARY, processTemplate(NotificationConstants.ORDER_SUMMARY_TEMPLATE, messageObjects));
+	    	messageObjects.put(NotificationConstants.CUSTOMER_INFO, processTemplate(NotificationConstants.CUSTOMER_INFO_TEMPLATE, messageObjects));
+	    	messageObjects.put(NotificationConstants.STORE_LOGO, processTemplate(NotificationConstants.STORE_LOGO_TEMPLATE, messageObjects));
+	    	messageObjects.put(NotificationConstants.ORDER_TOTAL, processTemplate(NotificationConstants.ORDER_TOTAL_TEMPLATE, messageObjects));
 	    }
 	    
-	    private static String[] getNotificationTemplates(){
-	    	return new String[]{
-	    			NotificationConstants.ORDER_SUMMARY_TEMPLATE, 
-	    			NotificationConstants.CUSTOMER_INFO_TEMPLATE,
-	    			NotificationConstants.STORE_LOGO_TEMPLATE,
-	    			NotificationConstants.ORDER_TOTAL_TEMPLATE};
+	    private static String processTemplate(String templatePath, Map<String, Object> templateValues){
+	    	String result = StringPool.BLANK;
+	    	try {
+				result =  StringUtil.read(EmailNotificationUtil.class.getClassLoader(),templatePath);
+				result = evaluateTemplate(templateValues,result);
+			} catch (IOException e) {
+				LOGGER.error("Error reading template "+templatePath,e);
+			} 
+	    	return result;
 	    }
 	    
-	    private static String getTemplateVariableName(String templatePath){
-	    	switch(templatePath){
-		    	case NotificationConstants.ORDER_SUMMARY_TEMPLATE:{
-		    		return NotificationConstants.ORDER_SUMMARY;
-		    	}
-		    	case NotificationConstants.CUSTOMER_INFO_TEMPLATE:{
-		    		return NotificationConstants.CUSTOMER_INFO;
-		    	}
-		    	case NotificationConstants.STORE_LOGO_TEMPLATE:{
-		    		return NotificationConstants.STORE_LOGO;
-		    	}
-		    	case NotificationConstants.ORDER_TOTAL_TEMPLATE:{
-		    		return NotificationConstants.ORDER_TOTAL;
-		    	}
-		    	default:
-		    		return null;
-	    	}
-	    }
-	    
-	    private static final String LOG_TAG_VELOCITY = "velocityLogTag";
-		private static final Log LOGGER = LogFactoryUtil.getLog(EmailNotificationUtil.class);
+	    private static final Log LOGGER = LogFactoryUtil.getLog(EmailNotificationUtil.class);
+	    private static final String LOG_TAG_VELOCITY = "velocityLogTag";		
 		private static final String TEMPLATE_PROCESSING_ERROR = "Error while processing an email velocity template. Template value: %S. %S";
 		private static final String ERROR_SENDING_NOTIFICATION = "Error while sending a notification. Notification Type: %S. %S";
 		private static final String DATE_FORMAT = "EEE, MMM d, yyyy ha";
