@@ -8,7 +8,7 @@
 		<dynamic-content language-id="en_US"><![CDATA[]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ProductImages" type="document_library" index-type="keyword" instance-id="zeyo">
-		<dynamic-content language-id="en_US"><![CDATA[/documents/40090/0/tele1.jpg/447334e9-ef29-1c7a-4fd5-3ca80857ddae?t=1517332423285]]></dynamic-content>
+		<dynamic-content language-id="en_US"><![CDATA[[$FILE=tele1.jpg$]]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ShortDescription" type="text" index-type="keyword" instance-id="ekwk">
 		<dynamic-content language-id="en_US"><![CDATA[Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.]]></dynamic-content>
