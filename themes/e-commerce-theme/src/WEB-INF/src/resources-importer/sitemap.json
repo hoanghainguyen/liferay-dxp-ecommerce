@@ -16,10 +16,7 @@
                     {
                     	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
                     	"portletPreferences": {
-							"anyAssetType":"31201",
-							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
-							"classTypeIds":"39839",
-							"displayStyle":"ddmTemplate_40498",
+							
 					        "displayStyleGroupId":"${groupId}",
 					        "classNameIds":[
 					          "com.liferay.journal.model.JournalArticle"
@@ -57,13 +54,10 @@
 					{
                     	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
                     	"portletPreferences": {
-							"anyAssetType":"31201",
-							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
-							"classTypeIds":"39839",
-							"displayStyle":"ddmTemplate_40498",
+							
 					        "displayStyleGroupId":"${groupId}",
 					        "classNameIds":[
-					          "com.liferay.journal.model.JournalArticle",
+					          "com.liferay.journal.model.JournalArticle"
 					        ],
 					        "portletSetupShowBorders": "false",
 					        "portletSetupPortletDecoratorId": "borderless"
@@ -130,13 +124,10 @@
 					{
                     	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
                     	"portletPreferences": {
-							"anyAssetType":"31201",
-							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
-							"classTypeIds":"39839",
-							"displayStyle":"ddmTemplate_40498",
+							
 					        "displayStyleGroupId":"${groupId}",
 					        "classNameIds":[
-					          "com.liferay.journal.model.JournalArticle",
+					          "com.liferay.journal.model.JournalArticle"
 					        ],
 					        "portletSetupShowBorders": "false",
 					        "portletSetupPortletDecoratorId": "borderless"
