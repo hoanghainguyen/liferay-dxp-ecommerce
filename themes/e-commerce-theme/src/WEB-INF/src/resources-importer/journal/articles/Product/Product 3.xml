@@ -8,7 +8,7 @@
 		<dynamic-content language-id="en_US"><![CDATA[Used Like New]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ProductImages" type="document_library" index-type="keyword" instance-id="puxq">
-		<dynamic-content language-id="en_US"><![CDATA[/documents/40090/0/ct3.jpg/14c336c5-041e-99ad-20e7-2a3b234c055f?t=1517332230945]]></dynamic-content>
+		<dynamic-content language-id="en_US"><![CDATA[[$FILE=ct3.jpg$]]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ShortDescription" type="text" index-type="keyword" instance-id="mlkf">
 		<dynamic-content language-id="en_US"><![CDATA[Lorem ipsum dolor sit amet, eu vix delicat]]></dynamic-content>

@@ -8,7 +8,7 @@
 		<dynamic-content language-id="en_US"><![CDATA[]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ProductImages" type="document_library" index-type="keyword" instance-id="ccki">
-		<dynamic-content language-id="en_US"><![CDATA[/documents/40090/0/asus.jpg/c669ceef-0009-bcba-fc9f-3ff57d977c63?t=1517332100354]]></dynamic-content>
+		<dynamic-content language-id="en_US"><![CDATA[[$FILE=asus.jpg$]]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="ShortDescription" type="text" index-type="keyword" instance-id="gpha">
 		<dynamic-content language-id="en_US"><![CDATA[Lorem ipsum dolor sit amet, eu vix]]></dynamic-content>
