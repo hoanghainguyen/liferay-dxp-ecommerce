@@ -1,0 +1,87 @@
+##The MIT License (MIT)
+
+##Copyright (c) 2014 - Vincent Gabriel
+
+##Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+##The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+##THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+##
+## This template can be used to modify the look of a specific
+## application.
+##
+## Please use the left panel to quickly add commonly used variables.
+## Autocomplete is also available and can be invoked by typing "$".
+##
+
+
+<div class="row">
+    <ul class="list-unstyled product-list">
+
+    #if (!$entries.isEmpty())
+    
+        #foreach ($entry in $entries)
+            #set($renderer = $entry.getAssetRenderer() )
+            #set($className = $renderer.getClassName() )
+            #if( $className == "com.liferay.journal.model.JournalArticle" )
+                #set( $journalArticle = $renderer.getArticle() )
+                #set( $document = $saxReaderUtil.read($journalArticle.getContent()) ) 
+                #set( $rootElement = $document.getRootElement() )
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ProductTitle']") )
+                #set( $productTitle = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ProductImages']") )
+                #set( $productImages = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='link']") )
+                #set( $link = $xPathSelector.selectSingleNode($rootElement).getStringValue() ) 
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ShortDescription']") )
+                #set( $shortDescription = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='SalePrice']") )
+                #set( $salePrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+                #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ListPrice']") )
+                #set( $listPrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
+                #set( $addLink = $themeDisplay.getURLCurrent().replace($themeDisplay.getLayout().getFriendlyURL(), "/cart"))
+                #set( $viewLink = $addLink.replace("/cart","/view"))
+                
+            #end
+            
+            #if ($validator.isNotNull($salePrice))
+                #set( $salePrice = $listPrice )
+            #end
+
+        
+            <li class="col-md-4">
+
+                <div class="card-type-asset card image-card">
+                    <div class="aspect-ratio card-item-first">
+                        <img 
+                            alt="thumbnail" 
+                            class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" 
+                            src="./image1.jpg"
+                        >
+                    </div>
+                    <div class="card-body">
+                        <div class="card-row">
+                            <div class="autofit-col autofit-col-expand">
+                                <a class=" card-title text-truncate" href="#1">
+                                    $productTitle
+                                </a>
+                                <div class="card-subtitle text-truncate">
+                                    $shortDescription
+                                </div>
+                            </div>
+                            <div class="autofit-col">
+                                <button class="btn btn-sm btn-primary" type="button">Add To Cart</button>
+                                <button class="btn btn-link" aria-label="View" type="button">view</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        #end
+    #end
+    
+    
+    </ul>
+</div>
