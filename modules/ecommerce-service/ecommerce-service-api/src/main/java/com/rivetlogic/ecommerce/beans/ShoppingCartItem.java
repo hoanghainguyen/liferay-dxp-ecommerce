@@ -73,7 +73,10 @@ public class ShoppingCartItem {
 	}
 
 	public String getListPrice() {
-		Double price = Double.valueOf(listPrice);
+		Double price = 0.0;
+		if(null != listPrice && !listPrice.isEmpty()){
+			price = Double.valueOf(listPrice);
+		}
 		return new DecimalFormat(ShoppingCartItemUtil.DECIMAL_FORMAT).format(price);
 	}
 

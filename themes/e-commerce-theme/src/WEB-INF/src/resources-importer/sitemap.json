@@ -1,0 +1,153 @@
+{
+	"layoutTemplateId": "1_column",
+	"publicPages": [
+		{
+			"columns": [
+				[
+					{
+                        "portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+                        "portletPreferences": {
+                            "articleId": "Jumbotron.xml",
+                            "groupId": "${groupId}",
+                            "portletSetupShowBorders": "false",
+                            "portletSetupPortletDecoratorId": "borderless"
+                        }
+                    },
+                    {
+                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
+                    	"portletPreferences": {
+							"anyAssetType":"31201",
+							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
+							"classTypeIds":"39839",
+							"displayStyle":"ddmTemplate_40498",
+					        "displayStyleGroupId":"${groupId}",
+					        "classNameIds":[
+					          "com.liferay.journal.model.JournalArticle"
+					        ],
+					        "portletSetupShowBorders": "false",
+					        "portletSetupPortletDecoratorId": "borderless"
+			  			}		
+					}
+				]
+			],
+			"friendlyURL": "/home",
+			"name": "Home",
+			"title": "Home"
+		},
+		{
+			"columns": [
+				[
+                    {
+                    	"portletId": "com_liferay_asset_tags_navigation_web_portlet_AssetTagsNavigationPortlet",
+                    	"portletPreferences": {
+							"maxAssetTags":"200",
+							"displayStyle":"Cloud",
+							"displayStyleGroupId":"${groupId}",
+							"showAssetCount":"false",
+							"classNameId":"true",
+							"showZeroAssetCount":"false",
+							"portletSetupUseCustomTitle":"true",
+							"portletSetupTitle_en_US":"Categories",
+							"portletSetupShowBorders": "false",
+							"portletSetupPortletDecoratorId": "borderless"
+			  			}		
+					}
+				],
+				[
+					{
+                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
+                    	"portletPreferences": {
+							"anyAssetType":"31201",
+							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
+							"classTypeIds":"39839",
+							"displayStyle":"ddmTemplate_40498",
+					        "displayStyleGroupId":"${groupId}",
+					        "classNameIds":[
+					          "com.liferay.journal.model.JournalArticle",
+					        ],
+					        "portletSetupShowBorders": "false",
+					        "portletSetupPortletDecoratorId": "borderless"
+			  			}		
+					}
+				]
+			],
+			"layoutTemplateId": "2_columns_ii",
+			"friendlyURL": "/categories",
+			"name": "Categories",
+			"title": "Categories"
+		},
+		{
+			"columns": [
+				[
+                    {
+                    	"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+						"portletPreferences": {
+                            "articleId": "Contact Us.xml",
+                            "groupId": "${groupId}",
+                            "portletSetupShowBorders": "false",
+                            "portletSetupPortletDecoratorId": "borderless"
+                        }
+                    }
+				]	
+			],
+			"friendlyURL": "/contact-us",
+			"name": "Contact Us",
+			"title": "Contact Us"
+		},
+		{
+			"columns": [
+				[
+                    {
+                    	"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+						"portletPreferences": {
+                            "articleId": "About Us.xml",
+                            "groupId": "${groupId}",
+                            "portletSetupShowBorders": "false",
+                            "portletSetupPortletDecoratorId": "borderless"
+                        }
+                    }
+				]	
+			],
+			"friendlyURL": "/about-us",
+			"name": "About Us",
+			"title": "About Us"
+		},
+		{
+			"columns": [
+				[
+					{
+						"portletId": "com_rivetlogic_ecommerce_portlet_ShoppingCart"
+					}
+				]
+			],
+			"friendlyURL": "/cart",
+			"name": "Cart",
+			"title": "Cart"
+		},
+		{
+			"columns": [
+				[
+					{
+                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
+                    	"portletPreferences": {
+							"anyAssetType":"31201",
+							"anyClassTypeJournalArticleAssetRendererFactory":"39839",
+							"classTypeIds":"39839",
+							"displayStyle":"ddmTemplate_40498",
+					        "displayStyleGroupId":"${groupId}",
+					        "classNameIds":[
+					          "com.liferay.journal.model.JournalArticle",
+					        ],
+					        "portletSetupShowBorders": "false",
+					        "portletSetupPortletDecoratorId": "borderless"
+			  			}		
+					}
+				]
+			],
+			"friendlyURL": "/view",
+			"name": "View",
+			"title": "View",
+			"hidden": "true"
+		}
+	]
+}

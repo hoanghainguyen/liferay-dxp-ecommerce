@@ -57,7 +57,7 @@
                         <img 
                             alt="thumbnail" 
                             class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" 
-                            src="./image1.jpg"
+                            src="$productImages"
                         >
                     </div>
                     <div class="card-body">
