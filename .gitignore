@@ -13,7 +13,7 @@
 /*/*/.DS_Store
 /*/*/.project
 /*/*/.settings/
-/*/*/*/bin
+/*/*/*/bin/
 /*/*/*/build
 /*/*/*/.project
 /*/*/*/.classpath
@@ -28,6 +28,6 @@ gradle.properties
 plugins-sdk/.classpath
 /libs/
 
-/modules/*/bin/
+/modules/**/bin/
 /modules/**/.gitignore
 /modules/**/.sass-cache/
