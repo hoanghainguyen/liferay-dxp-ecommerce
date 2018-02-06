@@ -16,11 +16,8 @@
                     {
                     	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
                     	"portletPreferences": {
-							"anyAssetType":"true",
 					        "displayStyleGroupId":"${groupId}",
-					        "classNameIds":[
-					          "com.liferay.journal.model.JournalArticle"
-					        ],
+					        "displayStyle":"ddmTemplate_SMALL_VIEW-1.0.0",
 					        "portletSetupShowBorders": "false",
 					        "portletSetupPortletDecoratorId": "barebone"
 			  			}		
@@ -52,12 +49,10 @@
 				],
 				[
 					{
-                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
+                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",                    	
                     	"portletPreferences": {
 					        "displayStyleGroupId":"${groupId}",
-					        "classNameIds":[
-					          "com.liferay.journal.model.JournalArticle"
-					        ],
+					        "displayStyle":"ddmTemplate_SMALL_VIEW-1.0.0",
 					        "portletSetupShowBorders": "false",
 					        "portletSetupPortletDecoratorId": "barebone"
 			  			}		
@@ -121,11 +116,10 @@
 			"columns": [
 				[
 					{
-                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",
+                    	"portletId": "com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet",                    	
                     	"portletPreferences": {
-					        "classNameIds":[
-					          "com.liferay.journal.model.JournalArticle"
-					        ],
+                    		"displayStyleGroupId":"${groupId}",
+					    	"displayStyle":"ddmTemplate_BIG_VIEW-1.0.0",
 					        "portletSetupShowBorders": "false",
 					        "portletSetupPortletDecoratorId": "barebone"
 			  			}		

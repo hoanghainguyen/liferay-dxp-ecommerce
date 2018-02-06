@@ -24,6 +24,7 @@
         #foreach ($entry in $entries)
             #set($renderer = $entry.getAssetRenderer() )
             #set($className = $renderer.getClassName() )
+			
             #if( $className == "com.liferay.journal.model.JournalArticle" )
                 #set( $journalArticle = $renderer.getArticle() )
                 #set( $document = $saxReaderUtil.read($journalArticle.getContent()) ) 
@@ -42,13 +43,14 @@
                 #set( $listPrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
                 #set( $addLink = $themeDisplay.getURLCurrent().replace($themeDisplay.getLayout().getFriendlyURL(), "/cart"))
                 #set( $viewLink = $addLink.replace("/cart","/view"))
-                
+				
+	            #if ($validator.isNotNull($salePrice))
+	                #set( $salePrice = $listPrice )
+	            #end                
             #end
             
-            #if ($validator.isNotNull($salePrice))
-                #set( $salePrice = $listPrice )
-            #end
-
+           
+			#if($validator.isNotNull($productTitle))
         
             <li class="col-md-4">
 
@@ -70,18 +72,18 @@
                                     $shortDescription
                                 </div>
                             </div>
-                            <div class="autofit-col">
-                                <button class="btn btn-sm btn-primary" type="button">Add To Cart</button>
-                                <button class="btn btn-link" aria-label="View" type="button">view</button>
+                            <div class="autofit-col">							
+	                            <a class="btn btn-primary" onclick="addToCart('$journalArticle.getArticleId()','$productTitle',$salePrice,'$addLink',this)">Add to Cart</a> 
+	                            <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn">View</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </li>
+				#set( $productTitle = 'null')
+			#end
         #end
-    #end
-    
-    
+    #end        
     </ul>
 </div>
