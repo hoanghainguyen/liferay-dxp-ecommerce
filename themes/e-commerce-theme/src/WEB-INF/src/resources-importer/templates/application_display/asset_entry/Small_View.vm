@@ -41,8 +41,14 @@
                 #set( $salePrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
                 #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ListPrice']") )
                 #set( $listPrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
-                #set( $addLink = $themeDisplay.getURLCurrent().replace($themeDisplay.getLayout().getFriendlyURL(), "/cart"))
-                #set( $viewLink = $addLink.replace("/cart","/view"))
+				#set( $currURL = $themeDisplay.getURLCurrent() )
+				#set( $currPageFriendlyURL = $themeDisplay.getLayout().getFriendlyURL())
+				#if ( $validator.isNotNull($currPageFriendlyURL) && $currURL.contains($currPageFriendlyURL))
+					#set( $addLink = $themeDisplay.getURLCurrent().replace($currPageFriendlyURL, "/cart"))					
+				#else
+					#set( $addLink = "$currURL/cart" )					
+				#end
+				#set( $viewLink = $addLink.replace("/cart","/view"))
 				
 	            #if ($validator.isNotNull($salePrice))
 	                #set( $salePrice = $listPrice )
