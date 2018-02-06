@@ -16,11 +16,11 @@
 ##
 
 
-<div class="row">
+
     <ul id="product-list" class="list-unstyled">
 
     #if (!$entries.isEmpty())
-    
+        #set( $rowIndex = 1 )
         #foreach ($entry in $entries)
             #set($renderer = $entry.getAssetRenderer() )
             #set($className = $renderer.getClassName() )
@@ -41,61 +41,70 @@
                 #set( $salePrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
                 #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ListPrice']") )
                 #set( $listPrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
-				#set( $currURL = $themeDisplay.getURLCurrent() )
-				#set( $currPageFriendlyURL = $themeDisplay.getLayout().getFriendlyURL())
-				#if ( $validator.isNotNull($currPageFriendlyURL) && $currURL.contains($currPageFriendlyURL))
-					#set( $addLink = $themeDisplay.getURLCurrent().replace($currPageFriendlyURL, "/cart"))					
-				#else
-					#set( $addLink = "$currURL/cart" )					
-				#end
-				#set( $viewLink = $addLink.replace("/cart","/view"))
+                #set( $currURL = $themeDisplay.getURLCurrent() )
+                #set( $currPageFriendlyURL = $themeDisplay.getLayout().getFriendlyURL())
+                #if ( $validator.isNotNull($currPageFriendlyURL) && $currURL.contains($currPageFriendlyURL))
+                  #set( $addLink = $themeDisplay.getURLCurrent().replace($currPageFriendlyURL, "/cart"))					
+                #else
+                  #set( $addLink = "$currURL/cart" )					
+                #end
+                #set( $viewLink = $addLink.replace("/cart","/view"))
 				
-	            #if ($validator.isNotNull($salePrice))
-	                #set( $salePrice = $listPrice )
-	            #end                
+                #if ($validator.isNotNull($salePrice))
+                    #set( $salePrice = $listPrice )
+                #end                
             #end
                 
 			#if($validator.isNotNull($productTitle))
-          <li class="col-md-4">
-
-              <div class="card-type-asset card image-card">
-                  <div class="aspect-ratio card-item-first">
+        #if($rowIndex == 1)
+          <li class="row">
+        #end
+          <div class="col-md-4">
+            
+              <div class="card image-card">
+                  <div class="card-bg">
                       <img 
-                          alt="thumbnail" 
-                          class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" 
+                          alt="thumbnail"
+                          class="img-responsive" 
                           src="$productImages"
                       >
                   </div>
                   <div class="card-body">
                       <div class="card-row">
                           <div class="autofit-col autofit-col-expand">
-                              <a class=" card-title text-truncate" href="#1">
+                              <a class=" card-title" href="#1">
                                   $productTitle
                               </a>
-                              <div class="card-subtitle text-truncate">
+                              <div class="card-subtitle">
                                   $shortDescription
                               </div>
                           </div>
-                          <div class="autofit-col">							
-                            <a 
-                              class="btn btn-primary add-to-cart-js" 
-                              data-article-id="$journalArticle.getArticleId()",
-                              data-product-title="$productTitle",
-                              data-sale-price="$salePrice",
-                              data-add-link="$addLink"
-                            >
-                                Add to Cart
-                            </a> 
-                            <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn">View</a>
-                          </div>
+                      </div>
+                      <div class="card-row">
+                        <div class="card-btns">							
+                          <a 
+                            class="btn btn-border btn-sm add-to-cart-js" 
+                            data-article-id="$journalArticle.getArticleId()",
+                            data-product-title="$productTitle",
+                            data-sale-price="$salePrice",
+                            data-add-link="$addLink"
+                          >
+                              Add to Cart
+                          </a> 
+                          <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn btn-sm">View</a>
+                        </div>
                       </div>
                   </div>
               </div>
 
+          </div>
+        #if($rowIndex == 3 )
+          #set( $rowIndex = 0)
           </li>
+        #end
+        #set( $rowIndex = $rowIndex + 1)
 				#set( $productTitle = 'null')
 			#end
         #end
     #end        
     </ul>
-</div>
