@@ -38,21 +38,21 @@ AUI().ready(
         }
        });
     }
-    
-    function createSuccessMessage(element){
-      var div = document.createElement("div");
-      div.className = "added_message alert alert-success";
-      var p =  document.createElement("p"); 
-      var message = document.createTextNode("Item successfully added.");
-      p.appendChild(message);  
-      div.appendChild(p); 
-      element.append(div); 
-      $(div).fadeOut(4000);
-    }
-    
-    
-    function addToCart(id,product,price,link,that){
-    
+
+	}
+);
+
+(function ($, window) {
+
+  $(document).ready(function () {
+    $('#product-list').on('click', '.add-to-cart-js', function (e){
+
+      console.log('clicked add to cart');
+
+      var id = $(e.currentTarget).data('articleId');
+      var product = $(e.currentTarget).data('productTitle');
+      var link = $(e.currentTarget).data('addLink');      
+
       var url = Liferay.PortletURL.createURL(link);
       url.setLifecycle(Liferay.PortletURL.RESOURCE_PHASE);
       url.setPortletId('com_rivetlogic_ecommerce_portlet_ShoppingCart');
@@ -73,10 +73,21 @@ AUI().ready(
             badge.html(items);
             badge.show();
           }
-            createSuccessMessage($(that).parent());
-         });
-    }
+          
+          // success message
+          console.log('sucess message');
+      });
+    });
+  });
 
+  /*
+  require('template-theme/js/modal/modal.es', function(Modal) { 
+    new Modal.default({
+      header: 'Test',
+      body: 'Hello, modal.',
+      buttons: ['close']
+    }, '#wrapper');
+  });
+  */
 
-	}
-);
+}) ($, window);

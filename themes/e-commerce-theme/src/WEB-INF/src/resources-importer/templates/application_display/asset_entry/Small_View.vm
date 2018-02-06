@@ -17,7 +17,7 @@
 
 
 <div class="row">
-    <ul class="list-unstyled product-list">
+    <ul id="product-list" class="list-unstyled">
 
     #if (!$entries.isEmpty())
     
@@ -48,39 +48,45 @@
 	                #set( $salePrice = $listPrice )
 	            #end                
             #end
-            
-           
+                
 			#if($validator.isNotNull($productTitle))
-        
-            <li class="col-md-4">
+          <li class="col-md-4">
 
-                <div class="card-type-asset card image-card">
-                    <div class="aspect-ratio card-item-first">
-                        <img 
-                            alt="thumbnail" 
-                            class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" 
-                            src="$productImages"
-                        >
-                    </div>
-                    <div class="card-body">
-                        <div class="card-row">
-                            <div class="autofit-col autofit-col-expand">
-                                <a class=" card-title text-truncate" href="#1">
-                                    $productTitle
-                                </a>
-                                <div class="card-subtitle text-truncate">
-                                    $shortDescription
-                                </div>
-                            </div>
-                            <div class="autofit-col">							
-	                            <a class="btn btn-primary" onclick="addToCart('$journalArticle.getArticleId()','$productTitle',$salePrice,'$addLink',this)">Add to Cart</a> 
-	                            <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <div class="card-type-asset card image-card">
+                  <div class="aspect-ratio card-item-first">
+                      <img 
+                          alt="thumbnail" 
+                          class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" 
+                          src="$productImages"
+                      >
+                  </div>
+                  <div class="card-body">
+                      <div class="card-row">
+                          <div class="autofit-col autofit-col-expand">
+                              <a class=" card-title text-truncate" href="#1">
+                                  $productTitle
+                              </a>
+                              <div class="card-subtitle text-truncate">
+                                  $shortDescription
+                              </div>
+                          </div>
+                          <div class="autofit-col">							
+                            <a 
+                              class="btn btn-primary add-to-cart-js" 
+                              data-article-id="$journalArticle.getArticleId()",
+                              data-product-title="$productTitle",
+                              data-sale-price="$salePrice",
+                              data-add-link="$addLink"
+                            >
+                                Add to Cart
+                            </a> 
+                            <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn">View</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            </li>
+          </li>
 				#set( $productTitle = 'null')
 			#end
         #end
