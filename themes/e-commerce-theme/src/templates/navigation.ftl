@@ -1,4 +1,5 @@
 <#assign VOID = freeMarkerPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone")>
+<#assign VOID = freeMarkerPortletPreferences.setValue("displayStyle", "ddmTemplate_NAV-PILLS-JUSTIFIED-FTL")>
 
 <div aria-expanded="false" class="collapse navbar-collapse" id="navigationCollapse">
 	<#if has_navigation && is_setup_complete>
