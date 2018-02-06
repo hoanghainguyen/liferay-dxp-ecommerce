@@ -47,10 +47,25 @@
 						<@liferay.user_personal_bar />
 					</div>
 				</#if>
+
+        <#if has_navigation && is_setup_complete>
+          <div class="navbar-form navbar-right" role="search">
+            <#assign VOID = freeMarkerPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone")>
+            <@liferay.search default_preferences="${freeMarkerPortletPreferences}" />
+            <#assign VOID = freeMarkerPortletPreferences.reset()>
+          </div>
+        </#if>
+
 			</div>
 
-			<#include "${full_templates_path}/navigation.ftl" />
+      
 		</div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <#include "${full_templates_path}/navigation.ftl" />
+      </div>
+    </div>
 	</header>
 
 	<section class="container-fluid-1280" id="content">
