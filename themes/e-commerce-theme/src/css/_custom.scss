@@ -146,11 +146,6 @@ body {
 	}
 
 	.user-personal-bar {
-		@include sm {
-			position: absolute;
-			right: 20px;
-			top: 0;
-		}
 
 		.panel-notifications-count {
 			top: 50%;
@@ -226,7 +221,13 @@ body {
 
 	@include sm {
 		padding: 40px 0 30px;
-	}
+  }
+  
+  .navbar-header {
+    @include sm {
+      width: 100%;
+    }
+  }
 }
 
 #content .row {
