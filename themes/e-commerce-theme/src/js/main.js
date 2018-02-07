@@ -1,12 +1,11 @@
 AUI().ready(
-	'liferay-sign-in-modal',
+	'liferay-sign-in-modal', 'liferay-alert',
 	function(A) {
 		var signIn = A.one('.sign-in > a');
 
 		if (signIn && signIn.getData('redirect') !== 'true') {
 			signIn.plug(Liferay.SignInModal);
     }
-    
 
     $(function() {
       // Product View image click
@@ -39,15 +38,10 @@ AUI().ready(
        });
     }
 
-	}
-);
 
-(function ($, window) {
-
-  $(document).ready(function () {
     $('#product-list').on('click', '.add-to-cart-js', function (e){
 
-      console.log('clicked add to cart');
+      
 
       var id = $(e.currentTarget).data('articleId');
       var product = $(e.currentTarget).data('productTitle');
@@ -75,9 +69,28 @@ AUI().ready(
           }
           
           // success message
-          console.log('sucess message');
+          new Liferay.Alert(
+            {
+              delay: {
+                hide: 5000,
+                show: 0
+              },
+              message: 'Product added to your cart',
+              type: 'success',
+              closeable: true,
+              icon: 'exclamation-circle'
+            }
+          ).render('#product-list-message');
       });
     });
+
+	}
+);
+
+(function ($, window) {
+
+  $(document).ready(function () {
+    
   });
 
   /*

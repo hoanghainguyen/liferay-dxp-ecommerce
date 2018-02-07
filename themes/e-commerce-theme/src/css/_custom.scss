@@ -268,3 +268,16 @@ body {
 .btn-border {
   border-color: #869cad;
 }
+
+
+#product-list-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+
+  .has-control-menu & {
+    top: 64px;
+  }
+}

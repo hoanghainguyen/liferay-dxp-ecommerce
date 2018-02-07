@@ -16,7 +16,7 @@
 ##
 
 
-
+<div id="product-list-message"></div>
     <ul id="product-list" class="list-unstyled">
 
     #if (!$entries.isEmpty())
