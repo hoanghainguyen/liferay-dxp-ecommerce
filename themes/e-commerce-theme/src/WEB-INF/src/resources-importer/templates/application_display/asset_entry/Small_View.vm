@@ -91,7 +91,7 @@
                           >
                               Add to Cart
                           </a> 
-                          <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn btn-sm">View</a>
+                          <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn btn-default btn-sm">View</a>
                         </div>
                       </div>
                   </div>
