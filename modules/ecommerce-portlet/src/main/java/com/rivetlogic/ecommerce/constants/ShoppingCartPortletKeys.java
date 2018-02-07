@@ -43,4 +43,6 @@ public class ShoppingCartPortletKeys {
     public static final String SUCCESS_MESSAGE_CHECKOUT = "success-message-checkout";
     public static final String ERROR_MESSAGE_CHECKOUT = "error-message-checkout";
     public static final String MESSAGE_MISSING_REQUIRED_CHECKOUT_INFO= "error-information-required";
+    
+	public static final String PORTLET_STRUTS="ecommerce";
 }

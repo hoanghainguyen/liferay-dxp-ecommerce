@@ -58,6 +58,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=true",
 		"com.liferay.portlet.header-portlet-javascript=/js/main.js",
+		"com.liferay.portlet.struts-path="+ShoppingCartPortletKeys.PORTLET_STRUTS ,
 		"javax.portlet.display-name=Shopping Cart",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/shopping_cart/view.jsp",
