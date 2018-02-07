@@ -1,12 +1,11 @@
 AUI().ready(
-	'liferay-sign-in-modal',
+	'liferay-sign-in-modal', 'liferay-alert',
 	function(A) {
 		var signIn = A.one('.sign-in > a');
 
 		if (signIn && signIn.getData('redirect') !== 'true') {
 			signIn.plug(Liferay.SignInModal);
     }
-    
 
     $(function() {
       // Product View image click
@@ -38,21 +37,16 @@ AUI().ready(
         }
        });
     }
-    
-    function createSuccessMessage(element){
-      var div = document.createElement("div");
-      div.className = "added_message alert alert-success";
-      var p =  document.createElement("p"); 
-      var message = document.createTextNode("Item successfully added.");
-      p.appendChild(message);  
-      div.appendChild(p); 
-      element.append(div); 
-      $(div).fadeOut(4000);
-    }
-    
-    
-    function addToCart(id,product,price,link,that){
-    
+
+
+    $('#product-list').on('click', '.add-to-cart-js', function (e){
+
+      
+
+      var id = $(e.currentTarget).data('articleId');
+      var product = $(e.currentTarget).data('productTitle');
+      var link = $(e.currentTarget).data('addLink');      
+
       var url = Liferay.PortletURL.createURL(link);
       url.setLifecycle(Liferay.PortletURL.RESOURCE_PHASE);
       url.setPortletId('com_rivetlogic_ecommerce_portlet_ShoppingCart');
@@ -73,10 +67,40 @@ AUI().ready(
             badge.html(items);
             badge.show();
           }
-            createSuccessMessage($(that).parent());
-         });
-    }
-
+          
+          // success message
+          new Liferay.Alert(
+            {
+              delay: {
+                hide: 5000,
+                show: 0
+              },
+              message: 'Product added to your cart',
+              type: 'success',
+              closeable: true,
+              icon: 'exclamation-circle'
+            }
+          ).render('#product-list-message');
+      });
+    });
 
 	}
 );
+
+(function ($, window) {
+
+  $(document).ready(function () {
+    
+  });
+
+  /*
+  require('template-theme/js/modal/modal.es', function(Modal) { 
+    new Modal.default({
+      header: 'Test',
+      body: 'Hello, modal.',
+      buttons: ['close']
+    }, '#wrapper');
+  });
+  */
+
+}) ($, window);
