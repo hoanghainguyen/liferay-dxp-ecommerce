@@ -3,23 +3,20 @@
 <% 
 List<ShoppingCartItem>cartItemsIdsList = (List<ShoppingCartItem>) request.getAttribute(ShoppingCartPortletKeys.ATTR_CURRENT_ORDER_ITEMS);
 DecimalFormat decimalFormat = new DecimalFormat(ShoppingCartPortletKeys.DECIMAL_FORMAT);
-
 EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = EcommerceRequestHelper.getEcommerceGroupServiceConfiguration(request);
-
-
 %>
 
-	<portlet:actionURL name="checkout" var="checkoutURL">
-		<portlet:param name="REDIRECT" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
-	</portlet:actionURL>
-	
-	<portlet:actionURL name="checkout" var="paypalCheckoutURL">
-		<portlet:param name="paypalCheckout" value="true"/>
-		<portlet:param name="REDIRECT" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
-	</portlet:actionURL>
+<portlet:actionURL name="checkout" var="checkoutURL">
+	<portlet:param name="<%= WebKeys.REDIRECT%>" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
+</portlet:actionURL>
 
-<liferay-ui:success key="success-message-checkout" message="<%= ecommerceGroupServiceConfiguration.messageCheckoutSuccess() %>" />
-<liferay-ui:error key="error-message-checkout" message="<%= ecommerceGroupServiceConfiguration.messageCheckoutError() %>" />
+<portlet:actionURL name="checkout" var="paypalCheckoutURL">
+	<portlet:param name="<%= ShoppingCartPortletKeys.CHECKOUT_PARAMETER_PAYPAL %>" value="true"/>
+	<portlet:param name="<%= WebKeys.REDIRECT%>" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
+</portlet:actionURL>
+
+<liferay-ui:success key="<%=ShoppingCartPortletKeys.SUCCESS_MESSAGE_CHECKOUT %>" message="<%= ecommerceGroupServiceConfiguration.messageCheckoutSuccess() %>" />
+<liferay-ui:error key="<%= ShoppingCartPortletKeys.ERROR_MESSAGE_CHECKOUT %>" message="<%= ecommerceGroupServiceConfiguration.messageCheckoutError() %>" />
 
 <input type="hidden" id="page-reloaded" value="no" />
 <div class="row-fluid">
@@ -58,8 +55,8 @@ EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = Ecommerc
                         					<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_UPDATE_CART_ITEM %>" var="updateCartItemURL" >
 												<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_ID%>" value="<%= orderItem.getItemId() != 0l ? String.valueOf(orderItem.getItemId()): orderItem.getProductId()%>"/>
 												<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_COUNT%>" value=""/>
-											</portlet:resourceURL>
-                        					<input type="number" value="<%= orderItem.getCount()%>" min="1" data-old-value="<%= orderItem.getCount()%>" placeholder="Qnt." class="input-mini quantity-input" data-url="${updateCartItemURL}">
+											</portlet:resourceURL>										
+                        					<aui:input name="Quantity" label="" type="number" value="<%= orderItem.getCount()%>" min="1" data-old-value="<%= orderItem.getCount()%>" placeholder="Enter quantity" cssClass="input-mini quantity-input" data-url="${updateCartItemURL}" />
                         				</div>
                         				<div class="span5">
                         					<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_REMOVE_ITEM_FROM_CART %>" var="removeCartItemURL" >									
