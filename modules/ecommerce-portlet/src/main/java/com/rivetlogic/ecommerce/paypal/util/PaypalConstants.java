@@ -1,13 +1,15 @@
 package com.rivetlogic.ecommerce.paypal.util;
 
+import com.rivetlogic.ecommerce.paypal.auth.AuthPublicPath;
+
 public class PaypalConstants {
     // DEVELOPMENT ENDPOINT:
-    //public static final String PAYPAL_ENDPOINT = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+    public static final String PAYPAL_ENDPOINT = "https://www.sandbox.paypal.com/cgi-bin/webscr";
     
     // PRODUCTION ENDPOINT:
-    public static final String PAYPAL_ENDPOINT = "https://www.paypal.com/cgi-bin/webscr";
+    //public static final String PAYPAL_ENDPOINT = "https://www.paypal.com/cgi-bin/webscr";
     
-    public static final String NOTIFY_ACTION_PATH = "/c/ecommerce/notify";
+    public static final String NOTIFY_ACTION_PATH = AuthPublicPath.FULL_ACTION_URL ;
     
     public static final String PAYMENT_STATUS = "payment_status";
     public static final String PAYMENT_COMPLETE = "Completed";

@@ -64,6 +64,7 @@ public class PaypalUtil {
 			formatParam(sb, PaypalConstants.PARAM_NO_NOTE, "1");
 			formatParam(sb, PaypalConstants.PARAM_CURRENCY, PaypalConstants.CURRENCY_USD);
 
+			LOG.info("Paypal URL: " + sb);
 			if (LOG.isDebugEnabled())
 				LOG.debug("Paypal URL: " + sb);
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.rivetlogic.ecommerce.model.ShoppingOrder;
 import com.rivetlogic.ecommerce.model.ShoppingOrderItem;
 import com.rivetlogic.ecommerce.notification.EmailNotificationUtil;
+import com.rivetlogic.ecommerce.paypal.auth.AuthPublicPath;
 import com.rivetlogic.ecommerce.paypal.util.PaypalConstants;
 import com.rivetlogic.ecommerce.service.ShoppingOrderItemLocalServiceUtil;
 import com.rivetlogic.ecommerce.service.ShoppingOrderLocalServiceUtil;
@@ -41,18 +42,15 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 @Component(
 	immediate = true,
 	property = {
-        "path=/portal/ecommerceportlet"
+        "path="+AuthPublicPath.ACTION_URL 
     },
     service = StrutsAction.class
 )
@@ -70,14 +68,10 @@ public class PaypalNotificationAction extends BaseStrutsAction  {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
+		_log.info("Processing path "+AuthPublicPath.FULL_ACTION_URL );
 		if (_log.isDebugEnabled()) {
-			_log.debug("Processing path /c/portal/ecommerceportlet");
+			_log.debug("Processing path "+AuthPublicPath.FULL_ACTION_URL );
 		}
-
-		RequestDispatcher requestDispatcher =
-			_servletContext.getRequestDispatcher("ecommerceportletstrutsaction/html/portal/ecommerceportlet.jsp");
-
-		requestDispatcher.forward(request, response);
 
 		return doExecute(request, response);
 	}
@@ -88,11 +82,16 @@ public class PaypalNotificationAction extends BaseStrutsAction  {
         String status = ParamUtil.getString(request, PaypalConstants.PAYMENT_STATUS);
         
         _log.info(String.format(LOG_NOTIFICATION, orderId, status));
-                
-        ShoppingOrder order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
-        List<ShoppingOrderItem> items = ShoppingOrderItemLocalServiceUtil.findByOrderId(orderId);
         
-        if(items.isEmpty()) {
+        ShoppingOrder order = null;
+        List<ShoppingOrderItem> items = null;
+        
+        if (orderId > 0){                
+        	order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
+        	items = ShoppingOrderItemLocalServiceUtil.findByOrderId(orderId);
+        }
+        
+        if (order == null || items == null || items.isEmpty()) {
             _log.error(String.format(LOG_UNKNOWN_ORDER, orderId));
             return null;
         }
@@ -156,17 +155,9 @@ public class PaypalNotificationAction extends BaseStrutsAction  {
             _log.error(LOG_TRX_ERROR);
         }
         
-        return "/portal/paypal.jsp";
+        return null;
     }
-	
-	@Reference(target = "(osgi.web.symbolicname=ecommerceportlet.strutsaction)")
-	protected void setServletContext(ServletContext servletContext) {
-		_servletContext = servletContext;
-	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		PaypalNotificationAction.class);
-
-	private ServletContext _servletContext;
+	private static final Log _log = LogFactoryUtil.getLog(PaypalNotificationAction.class);
 
 }
