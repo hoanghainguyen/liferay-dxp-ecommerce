@@ -1,12 +1,8 @@
 <% if(null != cartItemsIdsList && !cartItemsIdsList.isEmpty()){ %>   
-<div class="row-fluid" id="checkout-panel">
-  <div class="span12">
-    <div class="block">
-      <div class="navbar navbar-inner block-header">
-        <div class="muted pull-left">Shipping Information</div>
-      </div>
-      <div class="block-content collapse in">
-        <div class="span12">
+	<liferay-ui:panel collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="Shipping Information">
+
+      	
+
           <div class="alert alert-info"><span class="text-error">*</span> indicates required field</div>
           <liferay-ui:error key="error-information-required" message="checkout-information-required-not-found" />
           <div id="page-reload-warning" class="alert alert-warning hide">
@@ -48,9 +44,5 @@
 
             
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	</liferay-ui:panel>
 <% } %>

@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.rivetlogic.ecommerce.model.ShoppingOrder;
 import com.rivetlogic.ecommerce.notification.EmailNotificationUtil;
-import com.rivetlogic.ecommerce.service.ShoppingOrderLocalServiceUtil;
 import com.rivetlogic.ecommerce.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.rivetlogic.ecommerce.util.OrderStatusEnum;
 
@@ -99,15 +98,14 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		if (null != activeOrders && !activeOrders.isEmpty()) {
 			activeShoppingOrder = activeOrders.get(0);
 		} else if (createIfNotFound) {
-			activeShoppingOrder = ShoppingOrderLocalServiceUtil
-					.createShoppingOrder(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
+			activeShoppingOrder = createShoppingOrder(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
 			activeShoppingOrder.setOrderStatus(OrderStatusEnum.IN_PROGRESS.toString());
 			activeShoppingOrder.setUserId(userId);
 			activeShoppingOrder.setGroupId(groupId);
 			activeShoppingOrder.setCompanyId(companyId);
 			activeShoppingOrder.setCreateDate(DateUtil.newDate());
 			activeShoppingOrder.setModifiedDate(DateUtil.newDate());
-			ShoppingOrderLocalServiceUtil.addShoppingOrder(activeShoppingOrder);
+			addShoppingOrder(activeShoppingOrder);
 		}
 
 		return activeShoppingOrder;

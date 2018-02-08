@@ -18,6 +18,10 @@ public class ShoppingCartPortletKeys {
     public static final String WEB_CONTENT_ITEM_NAME = "itemName";
     public static final String WEB_CONTENT_ITEM_PRICE = "itemPrice";
     public static final String WEB_CONTENT_ITEM_COUNT = "itemCount";
+    
+    public static final String ORDER_ID = "orderId";
+    public static final String NOTES_UPDATE = "notes";
+    public static final String STATUS_UPDATE = "newStatus";
 	
 	public static final String COOKIE_SHOPPING_CART_ITEMS = "SHOPPING_CART_ITEMS";
     public static final String COOKIE_SHOPPING_CART_PRICES = "SHOPPING_CART_PRICES";   

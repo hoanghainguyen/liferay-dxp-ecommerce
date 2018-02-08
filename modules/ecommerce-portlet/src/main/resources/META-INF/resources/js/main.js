@@ -53,6 +53,7 @@ AUI.add('shopping-cart', function(A, NAME) {
     };
     
     ns.updateCartItem = function(quantityInput) {
+    	console.log(quantityInput);
     	var updateUrl = quantityInput.getData('url');
     	var oldValue = quantityInput.getData('old-value');
     	var newValue = Math.floor(parseFloat(quantityInput.val()));
