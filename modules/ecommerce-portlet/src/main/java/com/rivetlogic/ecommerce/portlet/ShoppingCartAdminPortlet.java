@@ -63,46 +63,45 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
 public class ShoppingCartAdminPortlet extends MVCPortlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(ShoppingCartAdminPortlet.class);
-	
-	public void processAction(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException {
-		 long orderId = ParamUtil.getLong(request, ShoppingCartPortletKeys.ORDER_ID);
-	        String notes = ParamUtil.getString(request, ShoppingCartPortletKeys.NOTES_UPDATE);
-	        String redirect = ParamUtil.getString(request, "redirect");
-	        _log.debug(String.format("Updating notes for order %s", orderId));
-	        try {
-	            ShoppingOrder order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
-	            order.setNotes(notes);
-	            ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-	            ShoppingOrderLocalServiceUtil.updateOrder(order, serviceContext);
-	            SessionMessages.add(request, "success");
-	        } catch(PortalException e) {
-	            _log.error(e.getMessage());
-	            if (_log.isDebugEnabled()){
-	            	_log.debug(e);
-	            }
-	        }
-	        response.sendRedirect(redirect);
+
+	public void updateOrderNotes(ActionRequest request, ActionResponse response) throws IOException, PortletException {
+		long orderId = ParamUtil.getLong(request, ShoppingCartPortletKeys.ORDER_ID);
+		String notes = ParamUtil.getString(request, ShoppingCartPortletKeys.NOTES_UPDATE);
+		String redirect = ParamUtil.getString(request, "redirect");
+		_log.debug(String.format("Updating notes for order %s", orderId));
+		try {
+			ShoppingOrder order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
+			order.setNotes(notes);
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			ShoppingOrderLocalServiceUtil.updateOrder(order, serviceContext);
+			SessionMessages.add(request, "success");
+		} catch (PortalException e) {
+			_log.error(e.getMessage());
+			if (_log.isDebugEnabled()) {
+				_log.debug(e);
+			}
+		}
+		response.sendRedirect(redirect);
 	}
 
 	public void updateOrderStatus(ActionRequest request, ActionResponse response) throws IOException, PortletException {
-        long orderId = ParamUtil.getLong(request, ShoppingCartPortletKeys.ORDER_ID);
-        String newStatus = ParamUtil.getString(request, ShoppingCartPortletKeys.STATUS_UPDATE);
-        String redirect = ParamUtil.getString(request, "redirect");
-        _log.debug(String.format("Updating order %s with status %s", orderId, newStatus));
-        
-        try {
-            ShoppingOrder order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
-            order.setOrderStatus(newStatus);
-            ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-            ShoppingOrderLocalServiceUtil.updateOrder(order, serviceContext);
-            SessionMessages.add(request, "success");
-        } catch(PortalException e) {
-            _log.error(e.getMessage());
-            if (_log.isDebugEnabled()){
-            	_log.debug(e);
-            }
-        }
-        response.sendRedirect(redirect);
-    }
+		long orderId = ParamUtil.getLong(request, ShoppingCartPortletKeys.ORDER_ID);
+		String newStatus = ParamUtil.getString(request, ShoppingCartPortletKeys.STATUS_UPDATE);
+		String redirect = ParamUtil.getString(request, "redirect");
+		_log.debug(String.format("Updating order %s with status %s", orderId, newStatus));
+
+		try {
+			ShoppingOrder order = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(orderId);
+			order.setOrderStatus(newStatus);
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			ShoppingOrderLocalServiceUtil.updateOrder(order, serviceContext);
+			SessionMessages.add(request, "success");
+		} catch (PortalException e) {
+			_log.error(e.getMessage());
+			if (_log.isDebugEnabled()) {
+				_log.debug(e);
+			}
+		}
+		response.sendRedirect(redirect);
+	}
 }
