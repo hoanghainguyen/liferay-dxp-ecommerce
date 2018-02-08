@@ -33,10 +33,8 @@
       #set( $shortDescription = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
       #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='ListPrice']") )
       #set( $listPrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
-      LP $listPrice<br>
       #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='SalePrice']") )
       #set( $salePrice = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
-      SP $salePrice<br>
       #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='WarningBadge']") )
       #set( $warning_badge = $xPathSelector.selectSingleNode($rootElement).getStringValue() )
       #set( $xPathSelector = $saxReaderUtil.createXPath("dynamic-element[@name='LongDescription']") )

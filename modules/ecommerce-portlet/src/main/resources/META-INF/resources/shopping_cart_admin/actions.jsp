@@ -1,4 +1,4 @@
-<%@ include file="/init.jsp" %>
+<%@ include file="/shopping_cart_admin/init.jsp" %>
 
 <%
 	ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);	
@@ -11,7 +11,7 @@
 	<c:if test="<%= !currentStatus.equals(OrderStatusEnum.IN_PROGRESS.toString()) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="orderId" value="${ order.orderId }" />
-			<portlet:param name="mvcPath" value="/html/orders/details.jsp" />
+			<portlet:param name="mvcPath" value="/shopping_cart_admin/details.jsp" />
 			<portlet:param name="redirect" value="<%= currentURL %>"/>
 		</portlet:renderURL>
 		<liferay-ui:icon image="view" message="order-details" url="<%= editURL	 %>" />

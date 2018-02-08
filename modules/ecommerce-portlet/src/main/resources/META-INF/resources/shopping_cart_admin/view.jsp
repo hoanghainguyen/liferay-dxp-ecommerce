@@ -48,6 +48,8 @@ data.put("qa-id", "navigation");
 		<liferay-ui:search-container-column-text name="order-customer-name" property="customerName" />
 		
 		<liferay-ui:search-container-column-text name="order-customer-email" property="customerEmail" />
+		
+		<liferay-ui:search-container-column-jsp  name="order-actions" path="/shopping_cart_admin/actions.jsp" />
 
 	</liferay-ui:search-container-row>
 	

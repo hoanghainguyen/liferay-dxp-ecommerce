@@ -36,7 +36,7 @@
                     	"portletId": "com_liferay_asset_tags_navigation_web_portlet_AssetTagsNavigationPortlet",
                     	"portletPreferences": {
 							"maxAssetTags":"200",
-							"displayStyle":"Cloud",
+							"displayStyle":"cloud",
 							"displayStyleGroupId":"${groupId}",
 							"showAssetCount":"false",
 							"classNameId":"true",
@@ -105,7 +105,11 @@
 			"columns": [
 				[
 					{
-						"portletId": "com_rivetlogic_ecommerce_portlet_ShoppingCart"
+						"portletId": "com_rivetlogic_ecommerce_portlet_ShoppingCart",
+						"portletPreferences": {
+					        "portletSetupShowBorders": "false",
+					        "portletSetupPortletDecoratorId": "barebone"
+			  			}	
 					}
 				]
 			],

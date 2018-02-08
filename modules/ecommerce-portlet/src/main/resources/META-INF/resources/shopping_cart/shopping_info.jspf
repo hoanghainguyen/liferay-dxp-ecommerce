@@ -1,82 +1,39 @@
 <% if(null != cartItemsIdsList && !cartItemsIdsList.isEmpty()){ %>   
-<div class="row-fluid" id="checkout-panel">
-  <div class="span12">
-    <div class="block">
-      <div class="navbar navbar-inner block-header">
-        <div class="muted pull-left">Shipping Information</div>
-      </div>
-      <div class="block-content collapse in">
-        <div class="span12">
+	<liferay-ui:panel collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="Shipping Information">
+
+      	
+
           <div class="alert alert-info"><span class="text-error">*</span> indicates required field</div>
           <liferay-ui:error key="error-information-required" message="checkout-information-required-not-found" />
           <div id="page-reload-warning" class="alert alert-warning hide">
           	<liferay-ui:message key="reload-message-checkout" />
           </div>
-          <form id="form-checkout" class="form-horizontal" method="post">
+          <form id="form-checkout" method="post">
           
           
-          	<aui:fieldset-group markupView="lexicon">
-          	
-          	
-          <div class="lfr-form-row">
+			<aui:fieldset >          	
+			<div class="lfr-form-row">
 			<div class="row-fields">
           
           		<aui:col width="<%= 50 %>">
-          			<div class="control-group span6">
-                <label for="email">Email Address <span class="text-error">*</span></label>
-                <input type="text" id="email" value="" name="<portlet:namespace />email" placeholder="Email Address" required>
-              </div> 
-              <div class="control-group span6">
-                <label for="street">Address line 1 <span class="text-error">*</span></label>
-                <input type="text" id="street1" value="" name="<portlet:namespace />address1" placeholder="Street Address" required>
-              </div>
-              
-              <div class="control-group span6">
-                <label for="city">City <span class="text-error">*</span></label>
-                <input type="text" id="city" value="" name="<portlet:namespace />city" placeholder="City" required>
-              </div>
-              
-              <div class="control-group span6">
-                <label for="postal">Postal Code</label>
-                <input type="text" id="postal" value="" name="<portlet:namespace />postalCode" placeholder="Postal Code">
-              </div> 
-              
-               <div class="control-group span6">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone" value="" name="<portlet:namespace />phone" placeholder="Phone">
-              </div> 
+	                <aui:input label="Email Address" type="text" id="email" value="" name="email" placeholder="Email Address" required="true" />
+	                <aui:input label="Address line 1" type="text" id="street1" value="" name="address1" placeholder="Street Address" required="true" />
+	                <aui:input label="City" type="text" id="city" value="" name="city" placeholder="City" required="true" />
+	                <aui:input label="Postal Code" type="text" id="postal" value="" name="postalCode" placeholder="Postal Code" />
+	                <aui:input label="Phone" type="text" id="phone" value="" name="phone" placeholder="Phone" />
           		</aui:col>
 
 		  		<aui:col width="<%= 50 %>">
-		  		
-		  		<div class="control-group span6">
-                <label for="name">Name <span class="text-error">*</span></label>
-                <input type="text" id="name" value="" name="<portlet:namespace />name" placeholder="Full Name" required>
-              </div>
-              
-              <div class="control-group span6">
-                <label for="street">Address line 2 </label>
-                <input type="text" id="street2" value="" name="<portlet:namespace />address2" placeholder="Building/Apt/Suite">
-              </div>
-              
-              <div class="control-group span6">
-                <label for="State">State/Province <span class="text-error">*</span></label>
-                <input type="text" id="State" value="" name="<portlet:namespace />stateProvince" placeholder="State" required>
-              </div>  
-              
-              <div class="control-group span6">
-                <label for="country">Country <span class="text-error">*</span></label>
-                <select id="country" name="<portlet:namespace />country" required>
-                  <%@ include file="/shopping_cart/options_country.jspf" %>
-                </select>
-              </div>  
-              
-              
+               		<aui:input lable="Name" type="text" id="name" value="" name="name" placeholder="Full Name" required="true" />
+	                <aui:input label="Address line 2" type="text" id="street2" value="" name="address2" placeholder="Building/Apt/Suite" />
+	                <aui:input label="State/Province" type="text" id="State" value="" name="stateProvince" placeholder="State" required="true" />
+	                <aui:select label="Country" id="country" name="country" required="true" >
+	                  <%@ include file="/shopping_cart/options_country.jspf" %>
+	                </aui:select>  
 		  		</aui:col>
           	</div>
-			</div>
-			
-				</aui:fieldset-group>
+			</div>			
+			</aui:fieldset>
 						
 			<aui:button-row>
 				<c:if test="<%= ecommerceGroupServiceConfiguration.enablePaypal() %>">
@@ -87,9 +44,5 @@
 
             
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	</liferay-ui:panel>
 <% } %>

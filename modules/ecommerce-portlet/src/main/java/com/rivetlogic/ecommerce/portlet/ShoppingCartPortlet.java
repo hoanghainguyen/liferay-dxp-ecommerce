@@ -58,6 +58,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=true",
 		"com.liferay.portlet.header-portlet-javascript=/js/main.js",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.struts-path="+ShoppingCartPortletKeys.PORTLET_STRUTS ,
 		"javax.portlet.display-name=Shopping Cart",
 		"javax.portlet.init-param.template-path=/",
@@ -70,7 +71,7 @@ import org.osgi.service.component.annotations.Component;
 )
 public class ShoppingCartPortlet extends MVCPortlet {
 	
-	private static final Log logger = LogFactoryUtil.getLog(ShoppingCartPortlet.class);
+	private static final Log _log = LogFactoryUtil.getLog(ShoppingCartPortlet.class);
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
@@ -90,7 +91,7 @@ public class ShoppingCartPortlet extends MVCPortlet {
 					}
 				}
 			} catch (SystemException e) {
-				logger.error(e.getMessage());
+				_log.error(e.getMessage());
 			}
 		} else {
 			List<String> orderItems = getOrderItemsIdsFromSession(renderRequest);
@@ -142,10 +143,12 @@ public class ShoppingCartPortlet extends MVCPortlet {
 		
 		if (!validateCheckoutInfo(request)) {
 			SessionErrors.add(request, ShoppingCartPortletKeys.MESSAGE_MISSING_REQUIRED_CHECKOUT_INFO);
-		} else if (!(shoppingCartPrefsBean.isCartPrefsValidForCheckout(isPaypal))) {
+		} 
+		else if (!(shoppingCartPrefsBean.isCartPrefsValidForCheckout(isPaypal))) {
 			SessionErrors.add(request, ShoppingCartPortletKeys.ERROR_MESSAGE_CHECKOUT);
-			logger.error(ERROR_CHECKOUT_MISSING_PORTLET_CONFIG);
-		} else {
+			_log.error(ERROR_CHECKOUT_MISSING_PORTLET_CONFIG);
+		} 
+		else {
 			try {
 				String value = doCheckout(request, response, isPaypal);
 				if (value != null) {
@@ -153,7 +156,7 @@ public class ShoppingCartPortlet extends MVCPortlet {
 				}
 			} catch (Exception e) {
 				SessionErrors.add(request, ShoppingCartPortletKeys.ERROR_MESSAGE_CHECKOUT);
-				logger.error(e);
+				_log.error(e);
 			}
 		}
 
