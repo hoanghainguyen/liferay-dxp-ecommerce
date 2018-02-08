@@ -83,7 +83,7 @@
                       <div class="card-row">
                         <div class="card-btns">							
                           <a 
-                            class="btn btn-border btn-sm add-to-cart-js" 
+                            class="btn btn-border-prim btn-sm add-to-cart-js" 
                             data-article-id="$journalArticle.getArticleId()",
                             data-product-title="$productTitle",
                             data-sale-price="$salePrice",
@@ -91,7 +91,7 @@
                           >
                               Add to Cart
                           </a> 
-                          <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn btn-default btn-sm">View</a>
+                          <a href="$viewLink?id=$journalArticle.getArticleId()" class="btn btn-border btn-sm">View</a>
                         </div>
                       </div>
                   </div>

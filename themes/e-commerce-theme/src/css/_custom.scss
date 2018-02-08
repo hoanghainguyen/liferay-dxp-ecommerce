@@ -3,6 +3,7 @@
 @import "components/card";
 @import "components/product-detail-view";
 @import "components/detail-box";
+@import "components/jumbotron";
 
 body {
 	background-color: $bg-color;
@@ -269,6 +270,28 @@ body {
 
 .btn-border {
   border-color: #869cad;
+  
+  &.btn {
+    color: #869cad;
+
+    &:hover {
+      color: #869cad;
+      border-color: #869cad;
+    }
+  }
+}
+
+.btn-border-prim {
+  border-color: #65b6f0;
+  
+  &.btn {
+    color: #65b6f0;
+
+    &:hover {
+      color: #65b6f0;
+      border-color: #65b6f0;      
+    }
+  }
 }
 
 
@@ -281,5 +304,19 @@ body {
 
   .has-control-menu & {
     top: 64px;
+  }
+}
+
+.footer-ctn {
+  margin: 0 auto;
+  width: 100px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  
+  img{
+    display: block;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
