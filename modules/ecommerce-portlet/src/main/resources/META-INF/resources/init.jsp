@@ -13,6 +13,7 @@
 <%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringPool" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.taglib.util.TagResourceBundleUtil"%>
 
 <%@ page import="com.rivetlogic.ecommerce.beans.ShoppingCartItem" %>
 <%@ page import="com.rivetlogic.ecommerce.configuration.EcommerceGroupServiceConfiguration" %>
@@ -31,6 +32,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.HashSet" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.ResourceBundle"%>
 <%@ page import="java.util.Set" %>
 
 
@@ -43,4 +45,5 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 String currentURL = PortalUtil.getCurrentURL(request);
+ResourceBundle resourceBundle = TagResourceBundleUtil.getResourceBundle(request, locale);
 %>

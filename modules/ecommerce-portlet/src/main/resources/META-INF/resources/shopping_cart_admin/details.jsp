@@ -7,13 +7,13 @@
 	pageContext.setAttribute("order", order);
 	String statusKey = order.getOrderStatus().toLowerCase();
 	pageContext.setAttribute("statusKey", statusKey);
-	String status = LanguageUtil.get(request, "order-status-" + statusKey);
+	String status = LanguageUtil.get(resourceBundle, "ecommerce-order-status-" + statusKey);
 	pageContext.setAttribute("status", status);
 %>
 
-<liferay-ui:success key="success" message="order-notes-update-success" />
+<liferay-ui:success key="success" message="ecommerce-order-notes-update-success" />
 
-<liferay-ui:header title="order-details" backURL="<%= redirect %>"/>
+<liferay-ui:header title="ecommerce-order-details" backURL="<%= redirect %>"/>
 
 <aui:model-context model="<%= ShoppingOrder.class %>" bean="<%= order %>" />
 
@@ -29,7 +29,7 @@
 			<aui:input name="createDate" label="created" disabled="true" type="text" />
 			<aui:input name="modifiedDate" label="last-modified" disabled="true" type="text" />
 			<aui:input name="total" disabled="true" />
-			<aui:input name="order-status" type="text" disabled="true" value="${ status }" helpMessage="help-status-${ statusKey }" />
+			<aui:input name="order-status" label="ecommerce-order-status" type="text" disabled="true" value="${ status }" helpMessage="ecommerce-help-status-${ statusKey }" />
 			<aui:form action="<%= updateNotesURL %>">
 			<aui:input name="notes" type="textarea"/>
 			<aui:button-row>
@@ -62,7 +62,7 @@
 				<thead class="table-columns">
 					<tr>
 						<th class="table-header">
-							 <liferay-ui:message key="product_id" />							
+							 <liferay-ui:message key="ecommerce-product-id" />							
 						</th>
 						<th class="table-header">
 							 <liferay-ui:message key="price" />							
