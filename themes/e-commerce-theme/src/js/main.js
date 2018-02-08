@@ -41,8 +41,6 @@ AUI().ready(
 
     $('#product-list').on('click', '.add-to-cart-js', function (e){
 
-      
-
       var id = $(e.currentTarget).data('articleId');
       var product = $(e.currentTarget).data('productTitle');
       var link = $(e.currentTarget).data('addLink');      
@@ -82,6 +80,12 @@ AUI().ready(
             }
           ).render('#product-list-message');
       });
+    });
+
+    // Product View image click
+    $('.side-image').click(function() {
+      var $imageLink = $(this).find('img').data('src');
+      $('.main-image').find('img').attr('src', $imageLink);
     });
 
 	}

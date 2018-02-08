@@ -1,6 +1,8 @@
 @import "portlet_decorator";
 @import "portlet_hello_world";
 @import "components/card";
+@import "components/product-detail-view";
+@import "components/detail-box";
 
 body {
 	background-color: $bg-color;
