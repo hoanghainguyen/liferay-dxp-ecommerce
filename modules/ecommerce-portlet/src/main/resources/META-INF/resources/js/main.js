@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2005-2016 Rivet Logic Corporation.
+ * Copyright (C) 2005-present Rivet Logic Corporation.
  * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -60,7 +60,6 @@ AUI.add('shopping-cart', function(A, NAME) {
     };
     
     ns.updateCartItem = function(quantityInput) {
-    	console.log(quantityInput);
     	var updateUrl = quantityInput.getData('url');
     	var oldValue = quantityInput.getData('old-value');
     	var newValue = Math.floor(parseFloat(quantityInput.val()));

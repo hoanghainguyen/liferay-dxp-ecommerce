@@ -363,15 +363,6 @@ public class ShoppingOrderItemLocalServiceWrapper
 	}
 
 	@Override
-	public void saveOrderItem(java.lang.String productId, long orderId,
-		float price,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_shoppingOrderItemLocalService.saveOrderItem(productId, orderId, price,
-			serviceContext);
-	}
-
-	@Override
 	public void saveOrderItemByProductId(java.lang.String productId,
 		com.rivetlogic.ecommerce.model.ShoppingOrder shoppingOrder,
 		float price,

@@ -1,17 +1,19 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
+ * Copyright (C) 2005-present Rivet Logic Corporation.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 package com.rivetlogic.ecommerce.service.impl;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
@@ -64,10 +66,10 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		ShoppingOrder shoppingOrder = createShoppingOrder(orderId);
 		return shoppingOrder;
 	}
-	
+
 	private void setAuditFields(ShoppingOrder shoppingOrder, ServiceContext serviceContext) {
 		Date now = new Date();
-		if (shoppingOrder.isNew()){
+		if (shoppingOrder.isNew()) {
 			shoppingOrder.setCreateDate(now);
 		}
 		shoppingOrder.setModifiedDate(now);
@@ -75,7 +77,8 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		shoppingOrder.setUserId(serviceContext.getUserId());
 	}
 
-	public ShoppingOrder updateOrder(ShoppingOrder shoppingOrder, ServiceContext serviceContext) throws SystemException {
+	public ShoppingOrder updateOrder(ShoppingOrder shoppingOrder, ServiceContext serviceContext)
+			throws SystemException {
 		setAuditFields(shoppingOrder, serviceContext);
 		return updateShoppingOrder(shoppingOrder);
 	}
@@ -85,7 +88,8 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		shoppingOrder.setOrderStatus(paypalEnabled ? OrderStatusEnum.WAITING_FOR_PAYPAL.toString()
 				: OrderStatusEnum.WAITING_FOR_PAYMENT.toString());
 		updateOrder(shoppingOrder, serviceContext);
-		shoppingOrderItemLocalService.saveOrderItemsByProductId(orderItemsProductIdsList, shoppingOrder, prices, serviceContext);
+		shoppingOrderItemLocalService.saveOrderItemsByProductId(orderItemsProductIdsList, shoppingOrder, prices,
+				serviceContext);
 		if (!paypalEnabled && null != notifyMessages)
 			for (Message message : notifyMessages) {
 				EmailNotificationUtil.sendEmailNotification(message, serviceContext);
@@ -94,7 +98,8 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 
 	public ShoppingOrder getUserActiveOrder(long userId, long groupId, long companyId, boolean createIfNotFound)
 			throws SystemException {
-		List<ShoppingOrder> activeOrders = findByGroupOrderStatusAndUserId(groupId, OrderStatusEnum.IN_PROGRESS.toString(), userId);
+		List<ShoppingOrder> activeOrders = findByGroupOrderStatusAndUserId(groupId,
+				OrderStatusEnum.IN_PROGRESS.toString(), userId);
 		ShoppingOrder activeShoppingOrder = null;
 		if (null != activeOrders && !activeOrders.isEmpty()) {
 			activeShoppingOrder = activeOrders.get(0);
@@ -112,8 +117,9 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 
 		return activeShoppingOrder;
 	}
-	
-	public List<ShoppingOrder> findByGroupOrderStatusAndUserId(long groupId, String orderStatus, long userId) throws SystemException {
+
+	public List<ShoppingOrder> findByGroupOrderStatusAndUserId(long groupId, String orderStatus, long userId)
+			throws SystemException {
 		return shoppingOrderPersistence.findByGroupOrderStatusAndUserId(groupId, orderStatus, userId);
 	}
 

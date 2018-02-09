@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2005-present Rivet Logic Corporation.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
 package com.rivetlogic.ecommerce.web.config;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -17,8 +33,9 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 public class EcommerceRequestHelper {
-	
-	public static EcommerceGroupServiceConfiguration getEcommerceGroupServiceConfiguration(PortletRequest portletRequest) {
+
+	public static EcommerceGroupServiceConfiguration getEcommerceGroupServiceConfiguration(
+			PortletRequest portletRequest) {
 		return getEcommerceGroupServiceConfiguration(PortalUtil.getHttpServletRequest(portletRequest));
 	}
 
@@ -28,8 +45,6 @@ public class EcommerceRequestHelper {
 
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-
-			_log.info("Site group id " + themeDisplay.getSiteGroupId());
 
 			ecommerceGroupServiceConfiguration = ConfigurationProviderUtil.getConfiguration(
 					EcommerceGroupServiceConfiguration.class,

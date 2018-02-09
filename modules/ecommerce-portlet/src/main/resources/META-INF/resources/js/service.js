@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2005-2016 Rivet Logic Corporation.
+ * Copyright (C) 2005-present Rivet Logic Corporation.
  * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -14,5 +14,4 @@
  * this program; if not, write to the Free Software Foundation, Inc., 51
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 Liferay.Service.register("Liferay.Service.rivetlogic", "com.rivetlogic.ecommerce.service", "shopping-cart-portlet");

@@ -335,13 +335,6 @@ public class ShoppingOrderItemLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static void saveOrderItem(java.lang.String productId, long orderId,
-		float price,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().saveOrderItem(productId, orderId, price, serviceContext);
-	}
-
 	public static void saveOrderItemByProductId(java.lang.String productId,
 		com.rivetlogic.ecommerce.model.ShoppingOrder shoppingOrder,
 		float price,

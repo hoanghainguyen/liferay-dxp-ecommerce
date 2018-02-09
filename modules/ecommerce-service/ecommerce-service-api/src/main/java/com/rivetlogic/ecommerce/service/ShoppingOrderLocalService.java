@@ -252,6 +252,9 @@ public interface ShoppingOrderLocalService extends BaseLocalService,
 		java.lang.String orderStatus, int start, int end,
 		OrderByComparator<ShoppingOrder> comparator) throws SystemException;
 
+	public List<ShoppingOrder> findByGroupOrderStatusAndUserId(long groupId,
+		java.lang.String orderStatus, long userId) throws SystemException;
+
 	public List<ShoppingOrder> findByOrderStatusAndUserId(
 		java.lang.String orderStatus, long userId) throws SystemException;
 

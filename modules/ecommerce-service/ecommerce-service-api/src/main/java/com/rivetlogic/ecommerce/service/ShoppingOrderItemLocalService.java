@@ -300,9 +300,6 @@ public interface ShoppingOrderItemLocalService extends BaseLocalService,
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
-	public void saveOrderItem(java.lang.String productId, long orderId,
-		float price, ServiceContext serviceContext) throws SystemException;
-
 	public void saveOrderItemByProductId(java.lang.String productId,
 		ShoppingOrder shoppingOrder, float price, ServiceContext serviceContext)
 		throws SystemException;

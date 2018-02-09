@@ -296,6 +296,13 @@ public class ShoppingOrderLocalServiceUtil {
 			end, comparator);
 	}
 
+	public static java.util.List<com.rivetlogic.ecommerce.model.ShoppingOrder> findByGroupOrderStatusAndUserId(
+		long groupId, java.lang.String orderStatus, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .findByGroupOrderStatusAndUserId(groupId, orderStatus, userId);
+	}
+
 	public static java.util.List<com.rivetlogic.ecommerce.model.ShoppingOrder> findByOrderStatusAndUserId(
 		java.lang.String orderStatus, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {

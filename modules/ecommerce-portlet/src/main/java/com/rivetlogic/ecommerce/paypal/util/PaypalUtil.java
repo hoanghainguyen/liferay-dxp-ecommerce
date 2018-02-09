@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2005-present Rivet Logic Corporation.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
 package com.rivetlogic.ecommerce.paypal.util;
 
 import com.liferay.portal.kernel.log.Log;
@@ -27,8 +43,7 @@ public class PaypalUtil {
 
 	public static String getPaypalRedirect(ActionRequest request, ActionResponse response,
 			ShoppingOrder shoppingOrder) {
-		EcommerceGroupServiceConfiguration conf = EcommerceRequestHelper
-				.getEcommerceGroupServiceConfiguration(request);
+		EcommerceGroupServiceConfiguration conf = EcommerceRequestHelper.getEcommerceGroupServiceConfiguration(request);
 		Locale locale = request.getLocale();
 		ShoppingCartPrefsBean prefsBean = new ShoppingCartPrefsBean(conf, locale);
 
@@ -64,7 +79,6 @@ public class PaypalUtil {
 			formatParam(sb, PaypalConstants.PARAM_NO_NOTE, "1");
 			formatParam(sb, PaypalConstants.PARAM_CURRENCY, PaypalConstants.CURRENCY_USD);
 
-			LOG.info("Paypal URL: " + sb);
 			if (LOG.isDebugEnabled())
 				LOG.debug("Paypal URL: " + sb);
 

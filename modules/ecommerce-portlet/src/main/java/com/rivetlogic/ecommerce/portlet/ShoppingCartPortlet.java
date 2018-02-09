@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2005-present Rivet Logic Corporation.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
 package com.rivetlogic.ecommerce.portlet;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
@@ -49,25 +65,22 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-/**
- * @author katalinamarcos
- */
 @Component(
-	immediate = true,
-	property = {
-		"com.liferay.portlet.display-category=category.sample",
-		"com.liferay.portlet.instanceable=true",
-		"com.liferay.portlet.header-portlet-javascript=/js/main.js",
-		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.struts-path="+ShoppingCartPortletKeys.PORTLET_STRUTS ,
-		"javax.portlet.display-name=Shopping Cart",
-		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.init-param.view-template=/shopping_cart/view.jsp",
-		"javax.portlet.name=" + ShoppingCartPortletKeys.SHOPPING_CART,
-		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user"
-	},
-	service = Portlet.class
+		immediate = true,
+		property = {
+			"com.liferay.portlet.display-category=category.sample",
+			"com.liferay.portlet.instanceable=true",
+			"com.liferay.portlet.header-portlet-javascript=/js/main.js",
+			"com.liferay.portlet.header-portlet-css=/css/main.css",
+			"com.liferay.portlet.struts-path="+ShoppingCartPortletKeys.PORTLET_STRUTS ,
+			"javax.portlet.display-name=Shopping Cart",
+			"javax.portlet.init-param.template-path=/",
+			"javax.portlet.init-param.view-template=/shopping_cart/view.jsp",
+			"javax.portlet.name=" + ShoppingCartPortletKeys.SHOPPING_CART,
+			"javax.portlet.resource-bundle=content.Language",
+			"javax.portlet.security-role-ref=power-user,user"
+		},
+		service = Portlet.class
 )
 public class ShoppingCartPortlet extends MVCPortlet {
 	

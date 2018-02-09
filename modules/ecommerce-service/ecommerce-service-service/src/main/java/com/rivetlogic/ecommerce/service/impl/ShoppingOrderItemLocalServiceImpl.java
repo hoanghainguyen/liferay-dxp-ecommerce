@@ -1,17 +1,19 @@
 /**
- * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
+ * Copyright (C) 2005-present Rivet Logic Corporation.
+ * 
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; version 3 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-
 package com.rivetlogic.ecommerce.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
@@ -79,20 +81,17 @@ public class ShoppingOrderItemLocalServiceImpl extends ShoppingOrderItemLocalSer
 	}
 
 	private void saveOrderItem(String productId, long orderId, ServiceContext serviceContext) throws SystemException {
-		long orderItemId = counterLocalService.increment(ShoppingOrderItem.class.getName());
-		ShoppingOrderItem shoppingOrderItem = createOrderItem(orderItemId);
-		shoppingOrderItem.setOrderId(orderId);
-		shoppingOrderItem.setQuantity(1); // TODO ???
-		shoppingOrderItem.setProductId(productId);
-		updateOrderItem(shoppingOrderItem, serviceContext);
+		float price = 0;
+		saveOrderItem(productId, orderId, price, serviceContext);
 	}
 
-	public void saveOrderItem(String productId, long orderId, float price, ServiceContext serviceContext)
+	private void saveOrderItem(String productId, long orderId, float price, ServiceContext serviceContext)
 			throws SystemException {
 		long orderItemId = counterLocalService.increment(ShoppingOrderItem.class.getName());
 		ShoppingOrderItem shoppingOrderItem = createOrderItem(orderItemId);
 		shoppingOrderItem.setOrderId(orderId);
-		shoppingOrderItem.setQuantity(1); // TODO ???
+		//Note: It's always adding one article, because from the front end the quantity is not sent but the items are repeated in a list
+		shoppingOrderItem.setQuantity(1);
 		shoppingOrderItem.setPrice(price);
 		shoppingOrderItem.setProductId(productId);
 		updateOrderItem(shoppingOrderItem, serviceContext);

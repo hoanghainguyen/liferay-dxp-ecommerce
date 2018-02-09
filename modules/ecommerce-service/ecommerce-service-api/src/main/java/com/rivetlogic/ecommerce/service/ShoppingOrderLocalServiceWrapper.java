@@ -320,6 +320,14 @@ public class ShoppingOrderLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.rivetlogic.ecommerce.model.ShoppingOrder> findByGroupOrderStatusAndUserId(
+		long groupId, java.lang.String orderStatus, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingOrderLocalService.findByGroupOrderStatusAndUserId(groupId,
+			orderStatus, userId);
+	}
+
+	@Override
 	public java.util.List<com.rivetlogic.ecommerce.model.ShoppingOrder> findByOrderStatusAndUserId(
 		java.lang.String orderStatus, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
