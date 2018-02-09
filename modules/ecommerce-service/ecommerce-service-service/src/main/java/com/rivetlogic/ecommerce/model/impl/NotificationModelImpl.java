@@ -77,7 +77,7 @@ public class NotificationModelImpl extends BaseModelImpl<Notification>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "orderId", Types.BIGINT },
 			{ "subject", Types.VARCHAR },
-			{ "body", Types.VARCHAR },
+			{ "body", Types.CLOB },
 			{ "sender", Types.VARCHAR },
 			{ "recipients", Types.VARCHAR }
 		};
@@ -93,12 +93,12 @@ public class NotificationModelImpl extends BaseModelImpl<Notification>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("orderId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("subject", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("body", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("body", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("sender", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("recipients", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table rivetlogic_ecommerce_Notification (uuid_ VARCHAR(75) null,notificationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,orderId LONG,subject VARCHAR(75) null,body VARCHAR(75) null,sender VARCHAR(75) null,recipients VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rivetlogic_ecommerce_Notification (uuid_ VARCHAR(75) null,notificationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,orderId LONG,subject VARCHAR(75) null,body TEXT null,sender VARCHAR(75) null,recipients VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rivetlogic_ecommerce_Notification";
 	public static final String ORDER_BY_JPQL = " ORDER BY notification.notificationId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY rivetlogic_ecommerce_Notification.notificationId DESC";

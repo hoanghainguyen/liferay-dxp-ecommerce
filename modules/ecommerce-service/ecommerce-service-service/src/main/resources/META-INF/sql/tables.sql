@@ -8,7 +8,7 @@ create table rivetlogic_ecommerce_Notification (
 	modifiedDate DATE null,
 	orderId LONG,
 	subject VARCHAR(75) null,
-	body VARCHAR(75) null,
+	body TEXT null,
 	sender VARCHAR(75) null,
 	recipients VARCHAR(75) null
 );

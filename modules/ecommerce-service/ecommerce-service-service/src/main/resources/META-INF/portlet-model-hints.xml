@@ -11,7 +11,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="orderId" type="long" />
 		<field name="subject" type="String" />
-		<field name="body" type="String" >
+		<field name="body" type="String">
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="sender" type="String" />

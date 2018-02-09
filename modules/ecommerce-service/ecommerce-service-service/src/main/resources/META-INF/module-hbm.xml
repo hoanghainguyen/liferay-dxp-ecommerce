@@ -17,7 +17,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="orderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="subject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="body" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="body" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
 		<property name="sender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="recipients" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

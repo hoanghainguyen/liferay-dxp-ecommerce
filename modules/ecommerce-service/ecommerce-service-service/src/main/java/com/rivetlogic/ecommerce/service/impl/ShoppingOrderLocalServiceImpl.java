@@ -94,7 +94,7 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 
 	public ShoppingOrder getUserActiveOrder(long userId, long groupId, long companyId, boolean createIfNotFound)
 			throws SystemException {
-		List<ShoppingOrder> activeOrders = findByOrderStatusAndUserId(OrderStatusEnum.IN_PROGRESS.toString(), userId);
+		List<ShoppingOrder> activeOrders = findByGroupOrderStatusAndUserId(groupId, OrderStatusEnum.IN_PROGRESS.toString(), userId);
 		ShoppingOrder activeShoppingOrder = null;
 		if (null != activeOrders && !activeOrders.isEmpty()) {
 			activeShoppingOrder = activeOrders.get(0);
@@ -111,6 +111,10 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 		}
 
 		return activeShoppingOrder;
+	}
+	
+	public List<ShoppingOrder> findByGroupOrderStatusAndUserId(long groupId, String orderStatus, long userId) throws SystemException {
+		return shoppingOrderPersistence.findByGroupOrderStatusAndUserId(groupId, orderStatus, userId);
 	}
 
 	public List<ShoppingOrder> findByOrderStatusAndUserId(String orderStatus, long userId) throws SystemException {

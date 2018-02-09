@@ -51,6 +51,12 @@
 			<finder-column name="orderStatus" />
 			<finder-column name="userId" />
 		</finder>
+		
+		<finder name="GroupOrderStatusAndUserId" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="orderStatus" />
+			<finder-column name="userId" />
+		</finder>
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
