@@ -49,7 +49,15 @@ AUI.add('shopping-cart', function(A, NAME) {
     };
     
     ns.doCheckout = function(checkoutUrl) {
-    	A.one('#form-checkout').attr('action', checkoutUrl).submit();
+    	var formValidator = Liferay.Form.get(pns +'form-checkout').formValidator;
+
+		formValidator.validate();
+
+		if (formValidator.hasErrors()) {
+			return;
+		}
+
+    	A.one('#'+ pns +'form-checkout').attr('action', checkoutUrl).submit();
     };
     
     ns.updateCartItem = function(quantityInput) {

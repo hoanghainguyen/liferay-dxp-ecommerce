@@ -21,7 +21,7 @@ EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = Ecommerc
 <input type="hidden" id="page-reloaded" value="no" />
 
 <liferay-ui:panel-container cssClass="metadata-panel-container" extended="true" markupView="lexicon">
-	<liferay-ui:panel collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="My Cart">
+	<liferay-ui:panel collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="ecommerce-shopping-cart-title">
                   
 	<div class="alert alert-warning <%= (null != cartItemsIdsList && !cartItemsIdsList.isEmpty() ? "hidden" : StringPool.BLANK)%>"id="cart-empty-msg">
 		<%=ecommerceGroupServiceConfiguration.messageCartEmpty() %>
@@ -43,33 +43,33 @@ EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = Ecommerc
 		Double cartTotalPrice = 0d;
 		for(ShoppingCartItem orderItem : cartItemsIdsList){		
 		%>
-		<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_UPDATE_CART_ITEM %>" var="updateCartItemURL" >
-			<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_ID%>" value="<%= orderItem.getItemId() != 0l ? String.valueOf(orderItem.getItemId()): orderItem.getProductId()%>"/>
-			<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_COUNT%>" value=""/>
-		</portlet:resourceURL>	
-		<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_REMOVE_ITEM_FROM_CART %>" var="removeCartItemURL" >									
-			<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_ID%>" value="<%= orderItem.getItemId() != 0l ? String.valueOf(orderItem.getItemId()): orderItem.getProductId()%>"/>
-		</portlet:resourceURL>
-		
-		<tr class="item-data-row">
-			<td class="table-cell product_image"><a href="<%=orderItem.getItemLink()%>"><img src="<%= orderItem.getItemImage() %>"></a></td>
-			<td class="table-cell">
-				<a href="<%=orderItem.getItemLink()%>"><%= orderItem.getItemTitle() %></a>
-			</td>
-			<td class="table-cell">$<%= orderItem.getPrice()%></td>
-			<td class="table-cell">
-				<aui:row>
-					<aui:col width="<%= 80 %>">
-						<aui:input name="Quantity" label="" type="number" value="<%= orderItem.getCount()%>" min="1" data-old-value="<%= orderItem.getCount()%>" placeholder="Enter quantity" cssClass="input-mini quantity-input" data-url="${updateCartItemURL}" />
-					</aui:col>
-					<aui:col width="<%= 20 %>">
-						<button type="submit" class="btn btn-danger btn-mini btn-delete" data-url="${removeCartItemURL}"><i class="icon-remove icon-white"></i></button>
-					</aui:col>
-				</aui:row>
-			</td>
-			<td class="table-cell item-total-price">$<%= decimalFormat.format(orderItem.getTotalPrice())  %></td>
-			<% cartTotalPrice += orderItem.getTotalPrice(); %>
-		</tr>
+			<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_UPDATE_CART_ITEM %>" var="updateCartItemURL" >
+				<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_ID%>" value="<%= orderItem.getItemId() != 0l ? String.valueOf(orderItem.getItemId()): orderItem.getProductId()%>"/>
+				<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_COUNT%>" value=""/>
+			</portlet:resourceURL>	
+			<portlet:resourceURL id="<%= ShoppingCartPortletKeys.RC_REMOVE_ITEM_FROM_CART %>" var="removeCartItemURL" >									
+				<portlet:param name="<%=ShoppingCartPortletKeys.WEB_CONTENT_ITEM_ID%>" value="<%= orderItem.getItemId() != 0l ? String.valueOf(orderItem.getItemId()): orderItem.getProductId()%>"/>
+			</portlet:resourceURL>
+			
+			<tr class="item-data-row">
+				<td class="table-cell product_image"><a href="<%=orderItem.getItemLink()%>"><img src="<%= orderItem.getItemImage() %>"></a></td>
+				<td class="table-cell">
+					<a href="<%=orderItem.getItemLink()%>"><%= orderItem.getItemTitle() %></a>
+				</td>
+				<td class="table-cell">$<%= orderItem.getPrice()%></td>
+				<td class="table-cell">
+					<aui:row>
+						<aui:col width="<%= 80 %>">
+							<aui:input name="Quantity" label="" type="number" value="<%= orderItem.getCount()%>" min="1" data-old-value="<%= orderItem.getCount()%>" placeholder="Enter quantity" cssClass="input-mini quantity-input" data-url="${updateCartItemURL}" />
+						</aui:col>
+						<aui:col width="<%= 20 %>">
+							<button type="submit" class="btn btn-danger btn-mini btn-delete" data-url="${removeCartItemURL}"><i class="icon-remove icon-white"></i></button>
+						</aui:col>
+					</aui:row>
+				</td>
+				<td class="table-cell item-total-price">$<%= decimalFormat.format(orderItem.getTotalPrice())  %></td>
+				<% cartTotalPrice += orderItem.getTotalPrice(); %>
+			</tr>
 		<%
 		}
 		%>
@@ -94,11 +94,11 @@ EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration = Ecommerc
     A.all('.quantity-input').on('change', function(event){
     	A.ShoppingCart.updateCartItem(event.currentTarget);
     });
-    A.all('#btn-checkout').on('click', function(event){
+    A.all('#${pns}btn-checkout').on('click', function(event){
     	A.ShoppingCart.doCheckout('${checkoutURL}');
     });
     <c:if test="<%=ecommerceGroupServiceConfiguration.enablePaypal() %>">
-    A.all('#btn-paypal-checkout').on('click', function(event){
+    A.all('#${pns}btn-paypal-checkout').on('click', function(event){
     	A.ShoppingCart.doCheckout('${paypalCheckoutURL}');
     });
     </c:if>
