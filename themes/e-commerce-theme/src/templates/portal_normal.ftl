@@ -85,9 +85,20 @@
 	</section>
 
 	<footer class="container-fluid-1280" id="footer" role="contentinfo">
-		<div class="row">
-			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</div>
+		<#assign VOID = freeMarkerPortletPreferences.setValue("portletSetupPortletDecoratorId", "barebone") />
+    <#assign theme_groupID = htmlUtil.escape(theme_display.getCompanyGroupId()?string) />
+    <#assign VOID = freeMarkerPortletPreferences.setValue("groupId", '${group_id}') />
+    <#assign VOID = freeMarkerPortletPreferences.setValue("articleId", "FOOTER-LOGO") />
+
+
+
+    <@liferay_portlet["runtime"]
+      defaultPreferences="${freeMarkerPortletPreferences}"
+      portletProviderAction=portletProviderAction.VIEW
+      instanceId="footercontent"
+      portletName="com_liferay_journal_content_web_portlet_JournalContentPortlet" 
+    />
+    ${freeMarkerPortletPreferences.reset()}
 	</footer>
 </div>
 
