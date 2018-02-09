@@ -55,7 +55,7 @@
 						<a aria-labelledby="layout_${navItem.getLayoutId()}" ${nav_item_attr_has_popup} class="${nav_item_link_css_class}" ${nav_item_href_link} ${navItem.getTarget()} role="menuitem">
               <#if navItem.getName()?lower_case == 'cart' >
                 <span aria-hidden="true" class="icon-shopping-cart"></span>
-                <span id="cart_badge" class="badge badge-warning">3</span>
+                <span id="cart_badge" class="badge badge-warning"></span>
               <#else>
                 <@liferay_theme["layout-icon"] layout=navItem.getLayout() /> ${navItem.getName()} ${nav_item_caret}</span>
               </#if>

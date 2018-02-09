@@ -1,5 +1,5 @@
 <% if(null != cartItemsIdsList && !cartItemsIdsList.isEmpty()){ %>   
-	<liferay-ui:panel collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="ecommerce-shipping-information">
+	<liferay-ui:panel id="checkout-panel" collapsible="false" cssClass="metadata" extended="true" markupView="lexicon" title="ecommerce-shipping-information">
 
 	<div class="alert alert-info">
       	<liferay-util:buffer var="requiredMark">

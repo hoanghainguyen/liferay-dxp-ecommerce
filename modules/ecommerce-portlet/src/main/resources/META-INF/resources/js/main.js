@@ -32,16 +32,15 @@ AUI.add('shopping-cart', function(A, NAME) {
             on : {
                 success : function(event, id, obj) {
                 	removeItemBtn.ancestor('.item-data-row').remove();
-                	if(this.get('responseData').cartDetails['quantity'] <= 0){
+                	var quantity= this.get('responseData').cartDetails['quantity'];
+                	if (quantity <= 0){
                 		A.all('.cart-items-details').addClass('hidden');
                 		A.one('#cart-empty-msg').removeClass('hidden');
                 		A.one('#checkout-panel').addClass('hidden');
+                		A.one('#cart_badge').addClass('hidden');
                 	}
-                	A.one('#cart-total-price').html('$' + this.get('responseData').cartDetails['total']);
-                	A.one('#cart_badge').html(this.get('responseData').cartDetails['quantity']);
-                	if(this.get('responseData').cartDetails['quantity'] == 0){
-                		A.one('#cart_badge').setAttribute('style', 'display:"none"');
-                	}
+                	A.one('#cart-total-price').html('$' + this.get('responseData').cartDetails['total']);                	
+                	A.one('#cart_badge').html(quantity);
                 },
                 error: function(event, id, obj){}
             }
