@@ -92,7 +92,9 @@ public class ShoppingOrderLocalServiceImpl extends ShoppingOrderLocalServiceBase
 				serviceContext);
 		if (!paypalEnabled && null != notifyMessages)
 			for (Message message : notifyMessages) {
-				EmailNotificationUtil.sendEmailNotification(message, serviceContext);
+				if (message != null){
+					EmailNotificationUtil.sendEmailNotification(message, serviceContext);
+				}
 			}
 	}
 

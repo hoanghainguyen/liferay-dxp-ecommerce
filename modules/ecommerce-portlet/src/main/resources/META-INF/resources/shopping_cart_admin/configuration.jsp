@@ -59,8 +59,8 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 				<div class="container-fluid-1280">
 					<aui:fieldset-group markupView="lexicon">
 						<aui:fieldset>
-							<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--storeName--" type="text" value="<%= storeName %>" />
-							<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--storeEmailAddress--" type="text" value="<%= storeEmailAddress %>" />
+							<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--storeName--" type="text" value="<%= storeName %>" required="true"/>
+							<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--storeEmailAddress--" type="text" value="<%= storeEmailAddress %>" required="true"/>
 
 						</aui:fieldset>
 					</aui:fieldset-group>
@@ -103,9 +103,9 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 				<div class="container-fluid-1280">
 					<aui:fieldset-group markupView="lexicon">
 						<aui:fieldset>
-							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-checkout-success-message" name="preferences--messageCheckoutSuccess--" type="text" value="<%= messageCheckoutSuccess %>" />
-							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-checkout-error-message" name="preferences--messageCheckoutError--" type="text" value="<%= messageCheckoutError %>" />
-							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-car-empty-message" name="preferences--messageCartEmpty--" type="text" value="<%= messageCartEmpty %>" />
+							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-checkout-success-message" name="preferences--messageCheckoutSuccess--" type="text" value="<%= messageCheckoutSuccess %>" required="true"/>
+							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-checkout-error-message" name="preferences--messageCheckoutError--" type="text" value="<%= messageCheckoutError %>" required="true"/>
+							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-car-empty-message" name="preferences--messageCartEmpty--" type="text" value="<%= messageCartEmpty %>" required="true"/>
 						</aui:fieldset>
 					</aui:fieldset-group>
 				</div>
@@ -115,7 +115,13 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 					<aui:fieldset-group markupView="lexicon">
 						<aui:fieldset>
 							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-enable-paypal" name="preferences--enablePaypal--" type="checkbox" value="<%= enablePaypal %>" />
-							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-paypal-business-email" name="preferences--paypalBusinessEmailAddress--" type="text" value="<%= paypalBusinessEmailAddress %>" />
+							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-paypal-business-email" name="preferences--paypalBusinessEmailAddress--" type="text" value="<%= paypalBusinessEmailAddress %>" >
+								<aui:validator name="required">
+					                function() {
+					                        return AUI.$('#<portlet:namespace />enablePaypal').prop('checked');
+					                }
+						        </aui:validator>
+							</aui:input>
 
 						</aui:fieldset>
 					</aui:fieldset-group>

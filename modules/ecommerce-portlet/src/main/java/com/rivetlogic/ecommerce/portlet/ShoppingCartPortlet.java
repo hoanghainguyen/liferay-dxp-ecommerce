@@ -242,9 +242,17 @@ public class ShoppingCartPortlet extends MVCPortlet {
 		EcommerceGroupServiceConfiguration conf = EcommerceRequestHelper.getEcommerceGroupServiceConfiguration(request);
 		Locale locale = request.getLocale();
 		ShoppingCartPrefsBean cartPrefsBean = new ShoppingCartPrefsBean(conf, locale);
-
-		Message customerMessage = EmailNotificationUtil.getNotificationMessage(themeDisplay, activeShoppingOrder, orderItemsIdsList, cartPrefsBean, NotificationConstants.CUSTOMER_NOTIFICATION);
-		Message storeMessage = EmailNotificationUtil.getNotificationMessage(themeDisplay, activeShoppingOrder, orderItemsIdsList, cartPrefsBean, NotificationConstants.STORE_NOTIFICATION);
+		
+		Message storeMessage = null;
+		Message customerMessage = null;
+		
+		if (cartPrefsBean.isStoreEmailEnabled()){
+			storeMessage = EmailNotificationUtil.getNotificationMessage(themeDisplay, activeShoppingOrder, orderItemsIdsList, cartPrefsBean, NotificationConstants.STORE_NOTIFICATION);			
+		}
+		
+		if (cartPrefsBean.isCustomerEmailEnabled()){
+			customerMessage = EmailNotificationUtil.getNotificationMessage(themeDisplay, activeShoppingOrder, orderItemsIdsList, cartPrefsBean, NotificationConstants.CUSTOMER_NOTIFICATION);
+		}
 		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 		
@@ -252,8 +260,12 @@ public class ShoppingCartPortlet extends MVCPortlet {
 		removeOrderItemsIdsFromSession(request);
 		
 		if(isPaypal) {
-		    EmailNotificationUtil.storeEmailNotification(activeShoppingOrder.getOrderId(), customerMessage, serviceContext);
-		    EmailNotificationUtil.storeEmailNotification(activeShoppingOrder.getOrderId(), storeMessage, serviceContext);
+			if (cartPrefsBean.isStoreEmailEnabled()){
+				EmailNotificationUtil.storeEmailNotification(activeShoppingOrder.getOrderId(), customerMessage, serviceContext);
+			}
+			if (cartPrefsBean.isCustomerEmailEnabled()){
+				EmailNotificationUtil.storeEmailNotification(activeShoppingOrder.getOrderId(), storeMessage, serviceContext);
+			}
 		    return PaypalUtil.getPaypalRedirect(request, response, activeShoppingOrder);
 		} else {
 		    SessionMessages.add(request, ShoppingCartPortletKeys.SUCCESS_MESSAGE_CHECKOUT);

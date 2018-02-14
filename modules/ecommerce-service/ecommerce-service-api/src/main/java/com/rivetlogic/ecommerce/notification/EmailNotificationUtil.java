@@ -137,7 +137,7 @@ public class EmailNotificationUtil {
 		}
 	}
 
-	public static void sendEmailNotification(Notification notification) throws Exception {
+	private static void sendEmailNotification(Notification notification) throws Exception {
 		InternetAddress sender = InternetAddress.parse(notification.getSender())[0],
 				recipient = InternetAddress.parse(notification.getRecipients())[0];
 		MailMessage mailMessage = new MailMessage(sender, notification.getSubject(), notification.getBody(), true);

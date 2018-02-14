@@ -34,7 +34,7 @@ public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
 			deflt = "My Store",
-	        required = false,
+	        required = true,
 	        name = "com.rivetlogic.ecommerce.config.store.name.name",
 	        description = "com.rivetlogic.ecommerce.config.store.name.description"
 	)
@@ -42,7 +42,7 @@ public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
 			deflt = "${server-property://com.liferay.portal/admin.email.from.address}",
-	        required = false,
+	        required = true,
 	        name = "com.rivetlogic.ecommerce.config.store.email.address.name",
 	        description = "com.rivetlogic.ecommerce.config.store.email.address.description"
 	)
@@ -98,7 +98,7 @@ public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
 			deflt = "Your order has been placed!",
-	        required = false,
+	        required = true,
 	        name = "com.rivetlogic.ecommerce.config.message.checkout.success.name",
 	        description = "com.rivetlogic.ecommerce.config.message.checkout.success.description"
 	)
@@ -106,7 +106,7 @@ public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
 			deflt = "Your order could not be processed!",
-	        required = false,
+	        required = true,
 	        name = "com.rivetlogic.ecommerce.config.message.checkout.error.name",
 	        description = "com.rivetlogic.ecommerce.config.message.checkout.error.description"
 	)
@@ -114,7 +114,7 @@ public interface EcommerceGroupServiceConfiguration {
 	
 	@Meta.AD(
 			deflt = "Your cart is empty.",
-	        required = false,
+	        required = true,
 	        name = "com.rivetlogic.ecommerce.config.message.car.empty.name",
 	        description = "com.rivetlogic.ecommerce.config.message.car.empty.description"
 	)
