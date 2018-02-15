@@ -16,6 +16,7 @@
  */
 package com.rivetlogic.ecommerce.beans;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.rivetlogic.ecommerce.configuration.EcommerceGroupServiceConfiguration;
 
 import java.util.Locale;
@@ -66,28 +67,14 @@ public class ShoppingCartPrefsBean {
 
 	public boolean isCartPrefsValidForCheckout(boolean isPaypal) {
 		boolean valid = ((null != getStoreEmail() && !getStoreEmail().isEmpty())
-				&& (null != getStoreName() && !getStoreName().isEmpty())
-				&& (null != getCustomerNotifSubjectTemplate() && !getCustomerNotifSubjectTemplate().isEmpty())
-				&& (null != getCustomerNotifBodyTemplate() && !getCustomerNotifBodyTemplate().isEmpty())
-				&& (null != getStoreNotifSubjectTemplate() && !getStoreNotifSubjectTemplate().isEmpty())
-				&& (null != getStoreNotifBodyTemplate() && !getStoreNotifBodyTemplate().isEmpty()));
+				&& (Validator.isNotNull(storeEmail))
+				&& (Validator.isNotNull(storeName))
+				&& (!isCustomerEmailEnabled || (Validator.isNotNull(customerNotifSubjectTemplate) && Validator.isNotNull(customerNotifBodyTemplate)))
+				&& (!isStoreEmailEnabled || (Validator.isNotNull(storeNotifSubjectTemplate) && Validator.isNotNull(storeNotifBodyTemplate))));
 		if (isPaypal) {
-			valid = valid && ((isPaypalEnabled() && null != getPaypalEmail() && !getPaypalEmail().isEmpty())
-					|| !isPaypalEnabled());
+			valid = valid && (!paypalEnabled || Validator.isNotNull(paypalEmail));
 		}
 		return valid;
-	}
-
-	public boolean isCartPrefsValid() {
-		return ((null != getStoreEmail() && !getStoreEmail().isEmpty())
-				&& (null != getStoreName() && !getStoreName().isEmpty())
-				&& (null != getCustomerNotifSubjectTemplate() && !getCustomerNotifSubjectTemplate().isEmpty())
-				&& (null != getCustomerNotifBodyTemplate() && !getCustomerNotifBodyTemplate().isEmpty())
-				&& (null != getStoreNotifSubjectTemplate() && !getStoreNotifSubjectTemplate().isEmpty())
-				&& (null != getStoreNotifBodyTemplate() && !getStoreNotifBodyTemplate().isEmpty())
-				&& (null != getCartIsEmptyMessage() && !getCartIsEmptyMessage().isEmpty())
-				&& (null != getCheckoutErrorMessage() && !getCheckoutErrorMessage().isEmpty())
-				&& (null != getCheckoutSuccessMessage() && !getCheckoutSuccessMessage().isEmpty()));
 	}
 
 	public String getStoreEmail() {

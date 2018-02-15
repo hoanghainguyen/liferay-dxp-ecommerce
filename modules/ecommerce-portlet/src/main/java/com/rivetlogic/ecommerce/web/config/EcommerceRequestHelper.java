@@ -51,7 +51,7 @@ public class EcommerceRequestHelper {
 					new ParameterMapSettingsLocator(request.getParameterMap(), new GroupServiceSettingsLocator(
 							themeDisplay.getSiteGroupId(), ShoppingCartPortletKeys.SHOPPING_CART_ADMIN)));
 
-			if (ecommerceGroupServiceConfiguration != null) {
+			if (ecommerceGroupServiceConfiguration != null && ecommerceGroupServiceConfiguration.storeEmailAddress().isEmpty()){
 				if (_log.isDebugEnabled()) {
 					_log.debug("First time, configuration is coming from system settings.");
 				}

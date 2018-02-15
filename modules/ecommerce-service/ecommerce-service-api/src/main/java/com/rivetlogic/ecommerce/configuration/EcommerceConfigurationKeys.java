@@ -20,4 +20,9 @@ public class EcommerceConfigurationKeys {
 
 	public static final String SERVICE_CONFIGURATION_ID = "com.rivetlogic.ecommerce.configuration.EcommerceGroupServiceConfiguration";
 	public static final String SERVICE_NAME = "com.rivetlogic.ecommerce";
+	public static final String STORE_NAME_DFTL = "My Store";
+	public static final String STORE_EMAIL_ADDRESS_DFTL = "${server-property://com.liferay.portal/admin.email.from.address}";
+	public static final String MESSAGE_CHECKOUT_SUCCESS_DFTL = "Your order has been placed!";
+	public static final String MESSAGE_CHECKOUT_ERROR_DFTL = "Your order could not be processed!";
+	public static final String MESSAGE_CAR_EMPTY_DFTL = "Your cart is empty.";
 }
