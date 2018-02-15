@@ -39,6 +39,7 @@ public class ShoppingCartPrefsBean {
 	private String cartIsEmptyMessage;
 
 	private boolean paypalEnabled;
+	private boolean usePaypalSandbox;
 	private String paypalEmail;
 
 	public ShoppingCartPrefsBean(EcommerceGroupServiceConfiguration ecommerceGroupServiceConfiguration, Locale locale) {
@@ -62,15 +63,17 @@ public class ShoppingCartPrefsBean {
 		cartIsEmptyMessage = ecommerceGroupServiceConfiguration.messageCartEmpty();
 
 		paypalEnabled = ecommerceGroupServiceConfiguration.enablePaypal();
+		usePaypalSandbox = ecommerceGroupServiceConfiguration.usePaypalSandbox();
 		paypalEmail = ecommerceGroupServiceConfiguration.paypalBusinessEmailAddress();
 	}
 
 	public boolean isCartPrefsValidForCheckout(boolean isPaypal) {
-		boolean valid = ((null != getStoreEmail() && !getStoreEmail().isEmpty())
-				&& (Validator.isNotNull(storeEmail))
+		boolean valid = ((null != getStoreEmail() && !getStoreEmail().isEmpty()) && (Validator.isNotNull(storeEmail))
 				&& (Validator.isNotNull(storeName))
-				&& (!isCustomerEmailEnabled || (Validator.isNotNull(customerNotifSubjectTemplate) && Validator.isNotNull(customerNotifBodyTemplate)))
-				&& (!isStoreEmailEnabled || (Validator.isNotNull(storeNotifSubjectTemplate) && Validator.isNotNull(storeNotifBodyTemplate))));
+				&& (!isCustomerEmailEnabled || (Validator.isNotNull(customerNotifSubjectTemplate)
+						&& Validator.isNotNull(customerNotifBodyTemplate)))
+				&& (!isStoreEmailEnabled || (Validator.isNotNull(storeNotifSubjectTemplate)
+						&& Validator.isNotNull(storeNotifBodyTemplate))));
 		if (isPaypal) {
 			valid = valid && (!paypalEnabled || Validator.isNotNull(paypalEmail));
 		}
@@ -155,6 +158,14 @@ public class ShoppingCartPrefsBean {
 
 	public void setPaypalEnabled(boolean enablePaypal) {
 		this.paypalEnabled = enablePaypal;
+	}
+
+	public boolean isUsePaypalSandbox() {
+		return usePaypalSandbox;
+	}
+
+	public void setUsePaypalSandbox(boolean usePaypalSandbox) {
+		this.usePaypalSandbox = usePaypalSandbox;
 	}
 
 	public String getPaypalEmail() {

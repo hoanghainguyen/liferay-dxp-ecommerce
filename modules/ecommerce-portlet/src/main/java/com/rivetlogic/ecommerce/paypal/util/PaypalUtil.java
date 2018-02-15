@@ -31,6 +31,7 @@ import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
@@ -40,6 +41,22 @@ import javax.portlet.ActionResponse;
 public class PaypalUtil {
 
 	private static final Log LOG = LogFactoryUtil.getLog(PaypalUtil.class);
+
+	public static String getPaypalEndPoint(HttpServletRequest request) {
+		EcommerceGroupServiceConfiguration conf = EcommerceRequestHelper.getEcommerceGroupServiceConfiguration(request);
+		Locale locale = request.getLocale();
+		ShoppingCartPrefsBean prefsBean = new ShoppingCartPrefsBean(conf, locale);
+		String paypalEndpoint = getPaypalEndPoint(prefsBean.isUsePaypalSandbox());
+		return paypalEndpoint;
+	}
+
+	public static String getPaypalEndPoint(boolean useSandbox) {
+		if (useSandbox) {
+			return PaypalConstants.PAYPAL_SANDBOX_ENDPOINT;
+		} else {
+			return PaypalConstants.PAYPAL_ENDPOINT;
+		}
+	}
 
 	public static String getPaypalRedirect(ActionRequest request, ActionResponse response,
 			ShoppingOrder shoppingOrder) {
@@ -58,9 +75,10 @@ public class PaypalUtil {
 			String[] names = shoppingOrder.getCustomerName().split(StringPool.SPACE);
 			String firstName = names[0];
 			String lastName = names.length > 1 ? names[1] : StringPool.BLANK;
+			String paypalEndpoint = getPaypalEndPoint(prefsBean.isUsePaypalSandbox());
 
 			StringBuilder sb = new StringBuilder();
-			sb.append(PaypalConstants.PAYPAL_ENDPOINT).append(StringPool.QUESTION);
+			sb.append(paypalEndpoint).append(StringPool.QUESTION);
 			formatParam(sb, PaypalConstants.PARAM_CMD, PaypalConstants.CMD_XCLICK);
 			formatParam(sb, PaypalConstants.PARAM_BUSINESS, paypalEmail);
 			formatParam(sb, PaypalConstants.PARAM_ITEM_NAME, orderId);

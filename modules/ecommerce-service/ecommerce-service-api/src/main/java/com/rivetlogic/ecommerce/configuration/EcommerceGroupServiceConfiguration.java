@@ -129,6 +129,14 @@ public interface EcommerceGroupServiceConfiguration {
 	public boolean enablePaypal();
 	
 	@Meta.AD(
+			deflt = "false",
+	        required = false,
+	        name = "com.rivetlogic.ecommerce.config.use.paypal.sandbox.name",
+	        description = "com.rivetlogic.ecommerce.config.use.paypal.sandbox.description"
+	)
+	public boolean usePaypalSandbox();
+	
+	@Meta.AD(
 			deflt = "",
 	        required = false,
 	        name = "com.rivetlogic.ecommerce.config.paypal.business.email.address.name",
