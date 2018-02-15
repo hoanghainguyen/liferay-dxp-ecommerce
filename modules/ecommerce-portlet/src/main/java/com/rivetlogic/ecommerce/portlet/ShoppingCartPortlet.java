@@ -133,7 +133,7 @@ public class ShoppingCartPortlet extends MVCPortlet {
 		List<String> orderItemsIdsList = null;
 		PortletSession portletSession = request.getPortletSession();
 		if(null != portletSession){
-			String cartItemsStrVal = (String)portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS);
+			String cartItemsStrVal = (String)portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS, PortletSession.APPLICATION_SCOPE);
 			if (null != cartItemsStrVal && !cartItemsStrVal.isEmpty()) {
 				orderItemsIdsList = (Arrays.asList(StringUtil.split(cartItemsStrVal, StringPool.COMMA)));
 			}
@@ -277,7 +277,7 @@ public class ShoppingCartPortlet extends MVCPortlet {
 	    PortletSession portletSession = request.getPortletSession();
 	    if(portletSession != null) {
 	        Map<String, Float> map = new HashMap<String,Float>();
-	        String values = (String) portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES);
+	        String values = (String) portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES, PortletSession.APPLICATION_SCOPE);
 	        String[] prices = values.split(",");
 	        for(String price : prices) {
 	            String[] item = price.split("=");
@@ -291,7 +291,7 @@ public class ShoppingCartPortlet extends MVCPortlet {
 	
 	private void removeOrderItemsIdsFromSession(PortletRequest request){
 		PortletSession portletSession = request.getPortletSession();
-		portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS, StringPool.BLANK);
+		portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS, StringPool.BLANK, PortletSession.APPLICATION_SCOPE);
 	}
 	
 	private static final String ERROR_CHECKOUT_MISSING_PORTLET_CONFIG = "\n PORTLET CONFIGURATION IS NOT COMPLETE. Some information in the portlet configuration is missing. \n";

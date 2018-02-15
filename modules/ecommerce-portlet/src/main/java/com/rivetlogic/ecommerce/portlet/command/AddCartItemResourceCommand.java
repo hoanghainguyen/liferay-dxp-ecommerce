@@ -154,14 +154,14 @@ public class AddCartItemResourceCommand extends BaseResourceCommand {
 	    PortletSession portletSession = request.getPortletSession();
 	    String value = "";
 	    if(portletSession != null) {
-	        Object current = portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES);
+	        Object current = portletSession.getAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES, PortletSession.APPLICATION_SCOPE);
 	        if(current != null) {
 	            value = (String) current;
 	            value += ",";
 	        }
 	    }
 	    value += String.format("%s=%s", itemId, price);
-	    portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES, value);
+	    portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_PRICES, value, PortletSession.APPLICATION_SCOPE);
 	}
 	
 	private float getItemPrice(String productId, long groupId) {

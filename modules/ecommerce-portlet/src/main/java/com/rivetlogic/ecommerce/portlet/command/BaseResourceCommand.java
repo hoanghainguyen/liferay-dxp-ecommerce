@@ -150,7 +150,7 @@ public abstract class BaseResourceCommand implements MVCResourceCommand {
 
 	protected void setSessionOrderItemsIds(PortletRequest request, String value) {
 		PortletSession portletSession = request.getPortletSession();
-		portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS, value);
+		portletSession.setAttribute(ShoppingCartPortletKeys.COOKIE_SHOPPING_CART_ITEMS, value, PortletSession.APPLICATION_SCOPE);
 	}
 
 	// Error response messages
