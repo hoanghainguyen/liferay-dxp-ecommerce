@@ -4,7 +4,7 @@
 <div aria-expanded="false" class="collapse navbar-collapse" id="navigationCollapse">
 	<#if has_navigation && is_setup_complete>
 		<nav class="${nav_css_class} site-navigation" id="navigation" role="navigation">
-			<div class="navbar-right">
+			<div class="navbar-right navigation-container">
 				<@liferay.navigation_menu default_preferences="${freeMarkerPortletPreferences}" />
 			</div>
 		</nav>
