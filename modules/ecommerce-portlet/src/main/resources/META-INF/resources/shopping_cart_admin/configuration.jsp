@@ -27,6 +27,7 @@ String messageCheckoutSuccess = ParamUtil.getString(request, "preferences--messa
 String messageCheckoutError = ParamUtil.getString(request, "preferences--messageCheckoutError--", ecommerceGroupServiceConfiguration.messageCheckoutError());
 String messageCartEmpty = ParamUtil.getString(request, "preferences--messageCartEmpty--", ecommerceGroupServiceConfiguration.messageCartEmpty());
 boolean enablePaypal = ParamUtil.getBoolean(request, "preferences--enablePaypal--", ecommerceGroupServiceConfiguration.enablePaypal());
+boolean usePaypalSandbox = ParamUtil.getBoolean(request, "preferences--usePaypalSandbox--", ecommerceGroupServiceConfiguration.usePaypalSandbox());
 String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--paypalBusinessEmailAddress--", ecommerceGroupServiceConfiguration.paypalBusinessEmailAddress());
 %>
 
@@ -115,6 +116,7 @@ String paypalBusinessEmailAddress = ParamUtil.getString(request, "preferences--p
 					<aui:fieldset-group markupView="lexicon">
 						<aui:fieldset>
 							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-enable-paypal" name="preferences--enablePaypal--" type="checkbox" value="<%= enablePaypal %>" />
+							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-enable-usePaypalSandbox" name="preferences--usePaypalSandbox--" type="checkbox" value="<%= usePaypalSandbox %>" />
 							<aui:input cssClass="lfr-input-text-container" label="ecommerce-config-paypal-business-email" name="preferences--paypalBusinessEmailAddress--" type="text" value="<%= paypalBusinessEmailAddress %>" >
 								<aui:validator name="required">
 					                function() {
