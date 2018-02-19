@@ -39,7 +39,9 @@
 			<div class="lfr-form-row">
 				<div class="row-fields">			       
 		       		<aui:col width="<%= 50 %>">
-						<aui:input label="Email Address" type="text" id="email" value="" name="email" placeholder="Email Address" required="true" tabindex="1"/>
+						<aui:input label="Email Address" type="text" id="email" value="" name="email" placeholder="Email Address" required="true" tabindex="1">
+							<aui:validator name="email" />
+						</aui:input>
 		              	<aui:input label="Address line 1" type="text" id="street1" value="" name="address1" placeholder="Street Address" required="true" tabindex="3"/>
 		              	<aui:input label="City" type="text" id="city" value="" name="city" placeholder="City" required="true" tabindex="5"/>
 		              	<aui:input label="Postal Code" type="text" id="postal" value="" name="postalCode" placeholder="Postal Code" tabindex="7"/>
