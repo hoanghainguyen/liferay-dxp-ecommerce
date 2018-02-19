@@ -63,7 +63,9 @@ public class EmailNotificationUtil {
 		Map<String, String> definitionTerms = new LinkedHashMap<>();
 
 		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.STORE_NAME,
-				LanguageUtil.get(locale, "ecommerce-store-name"));
+				LanguageUtil.get(locale, "ecommerce-store-name")+" "+fromName);
+		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.STORE_EMAIL,
+				LanguageUtil.get(locale, "ecommerce-store-email")+" "+fromAddress);
 		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.STORE_LOGO,
 				LanguageUtil.get(locale, "ecommerce-email-store-logo"));
 		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.CUSTOMER_NAME,
@@ -78,8 +80,8 @@ public class EmailNotificationUtil {
 				LanguageUtil.get(locale, "ecommerce-order-total"));
 		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.DATE,
 				LanguageUtil.get(locale, "ecommerce-checkout-date"));
-		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.FROM_ADDRESS, fromAddress);
-		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.FROM_NAME, fromName);
+		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.PORTAL_URL, LanguageUtil.get(locale, "ecommerce-portal-url"));
+		definitionTerms.put(StringPool.DOLLAR + NotificationConstants.PORTAL_LOGO, LanguageUtil.get(locale, "ecommerce-portal-logo"));
 
 		return definitionTerms;
 	}
