@@ -1,1 +1,0 @@
-# liferay-dxp-ecommerce
